@@ -23,14 +23,10 @@
 }
 
 - (IBAction)myAction:(UIButton *)sender {
-    [self retrieveRandomJokes];
+    [self getCurrentTime];
 }
 
-- (void) PrintInLable:(NSString*)str {
-    self.MyLable.text = str;
-}
-
-- (void)retrieveRandomJokes
+- (void)getCurrentTime
 {
     THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
     NSURL *url = [NSURL URLWithString:@"https://yandex.ru/time/sync.json?geo=47%2c213%2C202%2C10393%2C10636&lang=ru&ncrnd=0.13321626382539664"];
@@ -47,22 +43,30 @@
              {
                  NSNumber *time = data[@"time"];
                  NSLog(@"time: %@", time);
-                 NSLog(@"Type time: %@", [time class]);
                  
-                 NSString *time1 = [time stringValue];
-                 NSLog(@"Type time1: %@", [time1 class]);
-                 int sum = 0;
-                 for (int i=0; i < [time1 length] - 3; i++)
+                 NSString *srtingTime = [time stringValue];
+                 
+                 const int ZERO_CHAR_CODE = 48;
+                 const int POSITION_FOR_MS = 3;
+                 const int TIMEZONE_MSK = 3;
+                 const int MULTIPLIER = 10;
+                 const int SEC_IN_MIN = 60;
+                 const int MIN_IN_HOUR = 60;
+                 const int HOUR_IN_DAY = 24;
+                 
+                 int intTimeSec = 0;
+                 for (int i=0; i < [srtingTime length] - POSITION_FOR_MS; i++)
                  {
-                     int add = (int)[time1 characterAtIndex:i] - 48;
-                     sum = sum * 10 + add;
+                     int currNum = (int)[srtingTime characterAtIndex:i] - ZERO_CHAR_CODE;
+                     intTimeSec = intTimeSec * MULTIPLIER + currNum;
                  }
-                 int TimezoneNN = 3;
-                 int sec = sum % 60;
-                 int min = (sum / 60) % 60;
-                 int hour = (((sum / 60)) / 60 + TimezoneNN) % 24;
+                 int intTimeMin = intTimeSec / SEC_IN_MIN;
+                 int intTimeHour = intTimeMin / MIN_IN_HOUR;
                  
-                 printf("%0.2d:%0.2d:%0.2d", hour, min, sec);
+                 int sec = intTimeSec % SEC_IN_MIN;
+                 int min = intTimeMin % MIN_IN_HOUR;
+                 int hour = (intTimeHour + TIMEZONE_MSK) % HOUR_IN_DAY;
+                 
                  [self.MyLable setText:[NSString stringWithFormat:@"%0.2d:%0.2d:%0.2d", hour, min, sec]];
              }
          }

@@ -14,6 +14,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *MyLable;
 
 - (IBAction)myAction:(UIButton *)sender;
-- (void) PrintInLable:(NSString*)str;
 
 @end
