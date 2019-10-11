@@ -11,21 +11,50 @@
 @implementation NewsSet
 
 - (id) init {
-    self = [self init];
+    self = [super init];
     if (self) {
-        newsSet = [NSMutableArray array];
+        NewsPost * post = [[NewsPost alloc] init];
+        post.title = @"First title";
+        post.subtitle = @"First subtitle";
+        post.text = @"First text";
+        post.image = @"image1";
+        newsPostArray = [NSMutableArray arrayWithObject:post];
+        isFirstAdd = YES;
     }
     
-    return 0;
+    return self;
 }
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text {
-    struct NewsPost news;
-    news.title = title;
-    news.subtitle = subtitle;
-    news.text = text;
-    news.image = @"Some image";
-    //[newsSet addObject:news];
+- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image  {
+    if (isFirstAdd) {
+        [newsPostArray removeObjectAtIndex:0];
+        isFirstAdd = NO;
+    }
+    
+    NewsPost * post = [[NewsPost alloc] init];
+    post.title = title;
+    post.subtitle = subtitle;
+    post.text = text;
+    post.image = image;
+    [newsPostArray addObject:post];
+}
+
+- (long) getCount {
+    return [newsPostArray count];
+}
+
+- (void) print {
+    for (NewsPost * post in newsPostArray) {
+        NSLog(@"\nTitle: %@\nSubtitle: %@\nText: %@"
+             ,post.title
+             ,post.subtitle
+             ,post.text
+             );
+    }
+}
+
+- (NewsPost *) getAtIndex : (long) index {
+    return [newsPostArray objectAtIndex:index];
 }
 
 @end

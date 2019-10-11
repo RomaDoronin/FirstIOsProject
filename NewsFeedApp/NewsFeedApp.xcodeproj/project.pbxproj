@@ -15,7 +15,8 @@
 		3412AC47234F384C00538F51 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3412AC45234F384C00538F51 /* LaunchScreen.xib */; };
 		3412AC53234F384C00538F51 /* NewsFeedAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3412AC52234F384C00538F51 /* NewsFeedAppTests.m */; };
 		34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CCA234F6A8800E0D7EF /* NewsSet.m */; };
-		34D74CCE234F6F6200E0D7EF /* NewsSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CCD234F6F6200E0D7EF /* NewsSetViewController.m */; };
+		34D74CD12350821300E0D7EF /* NewsPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CD02350821300E0D7EF /* NewsPost.m */; };
+		34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +45,10 @@
 		3412AC52234F384C00538F51 /* NewsFeedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsFeedAppTests.m; sourceTree = "<group>"; };
 		34D74CC9234F6A8800E0D7EF /* NewsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsSet.h; sourceTree = "<group>"; };
 		34D74CCA234F6A8800E0D7EF /* NewsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsSet.m; sourceTree = "<group>"; };
-		34D74CCC234F6F6200E0D7EF /* NewsSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsSetViewController.h; sourceTree = "<group>"; };
-		34D74CCD234F6F6200E0D7EF /* NewsSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsSetViewController.m; sourceTree = "<group>"; };
+		34D74CCF2350821300E0D7EF /* NewsPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPost.h; sourceTree = "<group>"; };
+		34D74CD02350821300E0D7EF /* NewsPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsPost.m; sourceTree = "<group>"; };
+		34D74CDA2350CA9F00E0D7EF /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,17 +90,13 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				34D74CDD2350CAA700E0D7EF /* Detail */,
+				34D74CD62350971C00E0D7EF /* TableScreen */,
 				3412AC3A234F384C00538F51 /* AppDelegate.h */,
 				3412AC3B234F384C00538F51 /* AppDelegate.m */,
-				3412AC3D234F384C00538F51 /* ViewController.h */,
-				3412AC3E234F384C00538F51 /* ViewController.m */,
 				3412AC40234F384C00538F51 /* Main.storyboard */,
-				34D74CCC234F6F6200E0D7EF /* NewsSetViewController.h */,
-				34D74CCD234F6F6200E0D7EF /* NewsSetViewController.m */,
 				3412AC43234F384C00538F51 /* Images.xcassets */,
 				3412AC45234F384C00538F51 /* LaunchScreen.xib */,
-				34D74CC9234F6A8800E0D7EF /* NewsSet.h */,
-				34D74CCA234F6A8800E0D7EF /* NewsSet.m */,
 				3412AC36234F384C00538F51 /* Supporting Files */,
 			);
 			path = NewsFeedApp;
@@ -106,6 +105,8 @@
 		3412AC36234F384C00538F51 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3412AC3D234F384C00538F51 /* ViewController.h */,
+				3412AC3E234F384C00538F51 /* ViewController.m */,
 				3412AC37234F384C00538F51 /* Info.plist */,
 				3412AC38234F384C00538F51 /* main.m */,
 			);
@@ -127,6 +128,26 @@
 				3412AC51234F384C00538F51 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34D74CD62350971C00E0D7EF /* TableScreen */ = {
+			isa = PBXGroup;
+			children = (
+				34D74CCF2350821300E0D7EF /* NewsPost.h */,
+				34D74CD02350821300E0D7EF /* NewsPost.m */,
+				34D74CC9234F6A8800E0D7EF /* NewsSet.h */,
+				34D74CCA234F6A8800E0D7EF /* NewsSet.m */,
+			);
+			name = TableScreen;
+			sourceTree = "<group>";
+		};
+		34D74CDD2350CAA700E0D7EF /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				34D74CDA2350CA9F00E0D7EF /* DetailViewController.h */,
+				34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */,
+			);
+			name = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,10 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3412AC3F234F384C00538F51 /* ViewController.m in Sources */,
-				34D74CCE234F6F6200E0D7EF /* NewsSetViewController.m in Sources */,
 				3412AC3C234F384C00538F51 /* AppDelegate.m in Sources */,
 				34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */,
+				34D74CD12350821300E0D7EF /* NewsPost.m in Sources */,
 				3412AC39234F384C00538F51 /* main.m in Sources */,
+				34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewsSet.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+@private
+    NewsSet * newSet;
+}
 
 
 @end

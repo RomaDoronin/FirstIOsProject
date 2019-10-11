@@ -7,19 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-
-struct NewsPost {
-    __unsafe_unretained NSString * title;
-    __unsafe_unretained NSString * subtitle;
-    __unsafe_unretained NSString * text;
-    
-    __unsafe_unretained NSString * image;
-};
+#import "NewsPost.h"
 
 @interface NewsSet : NSObject{
-    NSMutableArray * newsSet;
+    NSMutableArray * newsPostArray;
+    bool isFirstAdd;
 }
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text;
+- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image;
+- (long) getCount;
+- (NewsPost *) getAtIndex : (long) index;
+
+- (void) print;
 
 @end
