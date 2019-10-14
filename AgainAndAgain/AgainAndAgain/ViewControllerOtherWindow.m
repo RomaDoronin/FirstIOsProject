@@ -1,30 +1,29 @@
 //
-//  DetailViewController.m
-//  NewsFeedApp
+//  ViewControllerOtherWindow.m
+//  AgainAndAgain
 //
-//  Created by Roman Doronin on 11.10.19.
+//  Created by Roman Doronin on 14.10.19.
 //  Copyright (c) 2019 Roman Doronin. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "ViewControllerOtherWindow.h"
 
-@interface DetailViewController ()
+@interface ViewControllerOtherWindow ()
+
 
 @end
 
-@implementation DetailViewController
+@implementation ViewControllerOtherWindow
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleUI.text = self.newsPost.title;
-    self.subtitleUI.text = self.newsPost.subtitle;
-    self.textUI.text = self.newsPost.text;
-    self.imageUI.image = [UIImage imageNamed:self.newsPost.image];
+    self.outputText.text = self.someText;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

@@ -14,10 +14,11 @@
     self = [super init];
     if (self) {
         NewsPost * post = [[NewsPost alloc] init];
-        post.title = @"First title";
-        post.subtitle = @"First subtitle";
-        post.text = @"First text";
-        post.image = @"image1";
+        post.title = @"";
+        post.subtitle = @"";
+        post.text = @"";
+        post.image = @"";
+        post.datetime = @"";
         newsPostArray = [NSMutableArray arrayWithObject:post];
         isFirstAdd = YES;
     }
@@ -25,7 +26,7 @@
     return self;
 }
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image  {
+- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime {
     if (isFirstAdd) {
         [newsPostArray removeObjectAtIndex:0];
         isFirstAdd = NO;
@@ -36,21 +37,12 @@
     post.subtitle = subtitle;
     post.text = text;
     post.image = image;
+    post.datetime = datetime;
     [newsPostArray addObject:post];
 }
 
 - (long) getCount {
     return [newsPostArray count];
-}
-
-- (void) print {
-    for (NewsPost * post in newsPostArray) {
-        NSLog(@"\nTitle: %@\nSubtitle: %@\nText: %@"
-             ,post.title
-             ,post.subtitle
-             ,post.text
-             );
-    }
 }
 
 - (NewsPost *) getAtIndex : (long) index {

@@ -13,7 +13,7 @@
 @synthesize title;
 @synthesize subtitle;
 @synthesize text;
-
 @synthesize image;
+@synthesize datetime;
 
 @end

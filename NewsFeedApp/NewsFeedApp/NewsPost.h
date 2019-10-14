@@ -8,19 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NewsPost : NSObject {
-@private
-    NSString * title;
-    NSString * subtitle;
-    NSString * text;
-    
-    NSString * image;
-};
+@interface NewsPost : NSObject
 
 @property NSString * title;
 @property NSString * subtitle;
 @property NSString * text;
-
 @property NSString * image;
+@property NSString * datetime;
 
 @end

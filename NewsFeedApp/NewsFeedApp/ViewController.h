@@ -14,6 +14,13 @@
     NewsSet * newSet;
 }
 
+@property BOOL isSort;
+
+@property (weak, nonatomic) IBOutlet UITableView *table;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ButtonFind;
+@property (weak, nonatomic) IBOutlet UISwitch *switchSort;
+
+- (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event;
 
 @end
 
