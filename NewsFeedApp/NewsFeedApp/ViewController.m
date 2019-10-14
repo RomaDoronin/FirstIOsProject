@@ -12,9 +12,13 @@
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 
+@property NewsSet * sortedNewsSet;
+
 @end
 
 @implementation ViewController
+
+@synthesize isSort;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +39,8 @@
     [newSet addNews:@"TITLE 12" :@"SUBTITLE 12" :@"TEXT 12" :@"image2" :@"2019-11-13T11:04:19Z"];
     
     self.isSort = NO;
+    
+    self.sortedNewsSet = [newSet sortByDatetime];
 }
 
 - (IBAction)findButton:(UIBarButtonItem *)sender {
@@ -50,13 +56,38 @@
     return [newSet getCount];
 }
 
+NSString * parseDatetime(NSString *datetime) {
+    char month1 = [datetime characterAtIndex:5];
+    char month2 = [datetime characterAtIndex:6];
+    
+    char day1 = [datetime characterAtIndex:8];
+    char day2 = [datetime characterAtIndex:9];
+    
+    char hour1 = [datetime characterAtIndex:11];
+    char hour2 = [datetime characterAtIndex:12];
+    
+    char minute1 = [datetime characterAtIndex:14];
+    char minute2 = [datetime characterAtIndex:15];
+    
+    return [NSString stringWithFormat:@"%c%c.%c%c %c%c:%c%c", day1, day2, month1, month2, hour1, hour2, minute1, minute2];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
-    cell.imageView.image = [UIImage imageNamed:[newSet getAtIndex:indexPath.row].image];
-    cell.textLabel.text = [newSet getAtIndex:indexPath.row].title;
-    cell.detailTextLabel.text = [newSet getAtIndex:indexPath.row].subtitle;
+    NewsPost * post = [[NewsPost alloc] init];
+    
+    if (isSort) {
+        post = [self.sortedNewsSet getAtIndex:indexPath.row];
+    }
+    else {
+        post = [newSet getAtIndex:indexPath.row];
+    }
+    
+    cell.imageView.image = [UIImage imageNamed:post.image];
+    cell.textLabel.text = post.title;
+    cell.detailTextLabel.text = parseDatetime(post.datetime);
     
     return cell;
 }
@@ -77,12 +108,12 @@
 - (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event {
     if (self.isSort) {
         self.isSort = NO;
-        NSLog(@"isSort = NO");
     }
     else {
         self.isSort = YES;
-        NSLog(@"isSort = YES");
     }
+    
+    [self.table reloadData];
 }
 
 @end

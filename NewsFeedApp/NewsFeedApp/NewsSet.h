@@ -17,5 +17,6 @@
 - (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime;
 - (long) getCount;
 - (NewsPost *) getAtIndex : (long) index;
+- (NewsSet *) sortByDatetime;
 
 @end

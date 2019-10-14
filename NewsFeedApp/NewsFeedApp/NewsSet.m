@@ -49,4 +49,17 @@
     return [newsPostArray objectAtIndex:index];
 }
 
+- (NewsSet *) sortByDatetime {
+    NSArray *filtredNewsPostArray = [newsPostArray sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(NewsPost *obj1, NewsPost *obj2) {
+        return [obj2.datetime localizedCaseInsensitiveCompare:obj1.datetime];
+    }];
+    
+    NewsSet *filtredNewsSet = [[NewsSet alloc] init];
+    for (NewsPost * post in filtredNewsPostArray) {
+        [filtredNewsSet addNews:post.title :post.subtitle :post.text :post.image :post.datetime];
+    }
+    
+    return filtredNewsSet;
+}
+
 @end
