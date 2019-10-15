@@ -15,5 +15,6 @@
 @synthesize text;
 @synthesize image;
 @synthesize datetime;
+@synthesize source;
 
 @end

@@ -15,5 +15,6 @@
 @property NSString * text;
 @property NSString * image;
 @property NSString * datetime;
+@property NSString * source;
 
 @end

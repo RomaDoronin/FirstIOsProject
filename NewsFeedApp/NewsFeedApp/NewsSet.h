@@ -14,7 +14,8 @@
     bool isFirstAdd;
 }
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime;
+- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime : (NSString *) source;
+- (void) addNews : (NewsPost *) post;
 - (long) getCount;
 - (NewsPost *) getAtIndex : (long) index;
 - (NewsSet *) sortByDatetime;

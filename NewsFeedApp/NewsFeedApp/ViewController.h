@@ -19,8 +19,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ButtonFind;
 @property (weak, nonatomic) IBOutlet UISwitch *switchSort;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton;
 
 - (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event;
+- (IBAction)filterActionButton:(UIButton *)sender;
 
 @end
 

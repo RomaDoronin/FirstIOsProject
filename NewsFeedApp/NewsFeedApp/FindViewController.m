@@ -94,7 +94,7 @@
             NewsPost *post = [self.newsSet getAtIndex:count];
             NSRange nameRange = [post.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if (nameRange.location != NSNotFound) {
-                [filteredNewsSet addNews:post.title :post.subtitle :post.text :post.image :post.datetime];
+                [filteredNewsSet addNews:post];
             }
         }
     }

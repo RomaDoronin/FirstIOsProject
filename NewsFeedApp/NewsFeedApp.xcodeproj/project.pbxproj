@@ -18,6 +18,7 @@
 		34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */; };
 		34DEC7032354625000F5FB4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34DEC7022354625000F5FB4E /* Main.storyboard */; };
 		34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC73E23547DE100F5FB4E /* FindViewController.m */; };
+		34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7422354C63000F5FB4E /* FilterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		34DEC7022354625000F5FB4E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../../.Trash/Main.storyboard; sourceTree = "<group>"; };
 		34DEC73D23547DE100F5FB4E /* FindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindViewController.h; sourceTree = "<group>"; };
 		34DEC73E23547DE100F5FB4E /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
+		34DEC7412354C63000F5FB4E /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		34DEC7422354C63000F5FB4E /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,7 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				34DEC7402354C5EA00F5FB4E /* Filter */,
 				34DEC73923547B4700F5FB4E /* Find */,
 				34D74CDD2350CAA700E0D7EF /* Detail */,
 				34D74CD62350971C00E0D7EF /* TableScreen */,
@@ -161,6 +165,15 @@
 				34DEC73E23547DE100F5FB4E /* FindViewController.m */,
 			);
 			name = Find;
+			sourceTree = "<group>";
+		};
+		34DEC7402354C5EA00F5FB4E /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				34DEC7412354C63000F5FB4E /* FilterViewController.h */,
+				34DEC7422354C63000F5FB4E /* FilterViewController.m */,
+			);
+			name = Filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +282,7 @@
 				34D74CD12350821300E0D7EF /* NewsPost.m in Sources */,
 				3412AC39234F384C00538F51 /* main.m in Sources */,
 				34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */,
+				34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */,
 				34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

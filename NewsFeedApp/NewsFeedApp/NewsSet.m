@@ -19,6 +19,7 @@
         post.text = @"";
         post.image = @"";
         post.datetime = @"";
+        post.source = @"";
         newsPostArray = [NSMutableArray arrayWithObject:post];
         isFirstAdd = YES;
     }
@@ -26,7 +27,7 @@
     return self;
 }
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime {
+- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime : (NSString *) source {
     if (isFirstAdd) {
         [newsPostArray removeObjectAtIndex:0];
         isFirstAdd = NO;
@@ -38,6 +39,11 @@
     post.text = text;
     post.image = image;
     post.datetime = datetime;
+    post.source = source;
+    [newsPostArray addObject:post];
+}
+
+- (void) addNews : (NewsPost *) post {
     [newsPostArray addObject:post];
 }
 
@@ -56,7 +62,7 @@
     
     NewsSet *filtredNewsSet = [[NewsSet alloc] init];
     for (NewsPost * post in filtredNewsPostArray) {
-        [filtredNewsSet addNews:post.title :post.subtitle :post.text :post.image :post.datetime];
+        [filtredNewsSet addNews:post];
     }
     
     return filtredNewsSet;
