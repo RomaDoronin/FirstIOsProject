@@ -28,7 +28,7 @@
     
     isFiltered = NO;
     pickerCurrRow = 0;
-    newsSource = @[@"BBC", @"Mashable", @"Chet.com", @"Hipertextual.com", @"The Next Web"];
+    //newsSource = @[@"BBC", @"Mashable", @"Chet.com", @"Hipertextual.com", @"The Next Web"];
 }
 
 /*

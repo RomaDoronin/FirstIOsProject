@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleUI.text = self.newsPost.title;
-    self.subtitleUI.text = self.newsPost.subtitle;
+    self.titleTextView.text = self.newsPost.title;
+    self.subtitleTextView.text = self.newsPost.subtitle;
     self.textUI.text = self.newsPost.text;
     self.imageUI.image = [UIImage imageNamed:self.newsPost.image];
     self.datetimeUI.text = [ViewController parseDatetime:self.newsPost.datetime];

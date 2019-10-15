@@ -11,8 +11,9 @@
 
 @interface DetailViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *titleUI;
-@property (weak, nonatomic) IBOutlet UILabel *subtitleUI;
+@property (weak, nonatomic) IBOutlet UITextView *titleTextView;
+@property (weak, nonatomic) IBOutlet UITextView *subtitleTextView;
+
 @property (weak, nonatomic) IBOutlet UITextView *textUI;
 @property (weak, nonatomic) IBOutlet UIImageView *imageUI;
 @property (weak, nonatomic) IBOutlet UILabel *datetimeUI;
