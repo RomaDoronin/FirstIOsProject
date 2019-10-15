@@ -57,7 +57,11 @@
     return [newSet getCount];
 }
 
-NSString * parseDatetime(NSString *datetime) {
++ (NSString *)parseDatetime:(NSString *)datetime {
+    if (datetime.length == 0) {
+        return @"";
+    }
+    
     char month1 = [datetime characterAtIndex:5];
     char month2 = [datetime characterAtIndex:6];
     
@@ -88,7 +92,7 @@ NSString * parseDatetime(NSString *datetime) {
     
     cell.imageView.image = [UIImage imageNamed:post.image];
     cell.textLabel.text = post.title;
-    cell.detailTextLabel.text = parseDatetime(post.datetime);
+    cell.detailTextLabel.text = [ViewController parseDatetime:post.datetime];
     
     return cell;
 }

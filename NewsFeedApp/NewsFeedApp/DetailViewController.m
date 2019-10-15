@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "ViewController.h"
 
 @interface DetailViewController ()
 
@@ -21,6 +22,8 @@
     self.subtitleUI.text = self.newsPost.subtitle;
     self.textUI.text = self.newsPost.text;
     self.imageUI.image = [UIImage imageNamed:self.newsPost.image];
+    self.datetimeUI.text = [ViewController parseDatetime:self.newsPost.datetime];
+    self.sourceUI.text = self.newsPost.source;
 }
 
 - (void)didReceiveMemoryWarning {

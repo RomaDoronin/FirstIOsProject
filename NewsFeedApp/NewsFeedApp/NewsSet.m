@@ -13,14 +13,6 @@
 - (id) init {
     self = [super init];
     if (self) {
-        NewsPost * post = [[NewsPost alloc] init];
-        post.title = @"";
-        post.subtitle = @"";
-        post.text = @"";
-        post.image = @"";
-        post.datetime = @"";
-        post.source = @"";
-        newsPostArray = [NSMutableArray arrayWithObject:post];
         isFirstAdd = YES;
     }
     
@@ -29,7 +21,7 @@
 
 - (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime : (NSString *) source {
     if (isFirstAdd) {
-        [newsPostArray removeObjectAtIndex:0];
+        newsPostArray = [[NSMutableArray alloc] init];
         isFirstAdd = NO;
     }
     
@@ -44,6 +36,11 @@
 }
 
 - (void) addNews : (NewsPost *) post {
+    if (isFirstAdd) {
+        newsPostArray = [[NSMutableArray alloc] init];
+        isFirstAdd = NO;
+    }
+    
     [newsPostArray addObject:post];
 }
 

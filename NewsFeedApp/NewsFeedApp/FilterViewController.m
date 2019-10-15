@@ -69,7 +69,7 @@
     
     DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
     
-    detailView.newsPost = [self.newsSet getAtIndex:indexPath.row];
+    detailView.newsPost = [filteredNewsSet getAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:detailView animated:YES];
 }

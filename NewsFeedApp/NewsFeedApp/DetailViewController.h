@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *subtitleUI;
 @property (weak, nonatomic) IBOutlet UITextView *textUI;
 @property (weak, nonatomic) IBOutlet UIImageView *imageUI;
+@property (weak, nonatomic) IBOutlet UILabel *datetimeUI;
+@property (weak, nonatomic) IBOutlet UILabel *sourceUI;
 
 @property NewsPost * newsPost;
 

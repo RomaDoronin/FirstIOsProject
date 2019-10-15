@@ -24,5 +24,7 @@
 - (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event;
 - (IBAction)filterActionButton:(UIButton *)sender;
 
++ (NSString *)parseDatetime:(NSString *)datetime;
+
 @end
 
