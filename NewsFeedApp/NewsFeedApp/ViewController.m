@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "FindViewController.h"
 #import "FilterViewController.h"
+#import "CollectionViewController.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -137,5 +138,12 @@
 - (IBAction)buttonSelectFilter:(UIButton *)sender {
     
 }
+
+- (IBAction)gridActionButton:(UIBarButtonItem *)sender {
+    CollectionViewController * gridView = [self.storyboard instantiateViewControllerWithIdentifier:@"gridView"];
+    
+    gridView.newsSet = newSet;
+    
+    [self.navigationController pushViewController:gridView animated:YES];}
 
 @end

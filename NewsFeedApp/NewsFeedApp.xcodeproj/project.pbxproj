@@ -19,6 +19,8 @@
 		34DEC7032354625000F5FB4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34DEC7022354625000F5FB4E /* Main.storyboard */; };
 		34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC73E23547DE100F5FB4E /* FindViewController.m */; };
 		34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7422354C63000F5FB4E /* FilterViewController.m */; };
+		34DEC74A2355D70F00F5FB4E /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7492355D70F00F5FB4E /* CollectionViewController.m */; };
+		34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC74C2355D85F00F5FB4E /* CollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		34DEC73E23547DE100F5FB4E /* FindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindViewController.m; sourceTree = "<group>"; };
 		34DEC7412354C63000F5FB4E /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		34DEC7422354C63000F5FB4E /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		34DEC7482355D70F00F5FB4E /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		34DEC7492355D70F00F5FB4E /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		34DEC74B2355D85F00F5FB4E /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		34DEC74C2355D85F00F5FB4E /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				34DEC7442355D22800F5FB4E /* Grid */,
 				34DEC7402354C5EA00F5FB4E /* Filter */,
 				34DEC73923547B4700F5FB4E /* Find */,
 				34D74CDD2350CAA700E0D7EF /* Detail */,
@@ -174,6 +181,17 @@
 				34DEC7422354C63000F5FB4E /* FilterViewController.m */,
 			);
 			name = Filter;
+			sourceTree = "<group>";
+		};
+		34DEC7442355D22800F5FB4E /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				34DEC7482355D70F00F5FB4E /* CollectionViewController.h */,
+				34DEC7492355D70F00F5FB4E /* CollectionViewController.m */,
+				34DEC74B2355D85F00F5FB4E /* CollectionViewCell.h */,
+				34DEC74C2355D85F00F5FB4E /* CollectionViewCell.m */,
+			);
+			name = Grid;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,8 +300,10 @@
 				34D74CD12350821300E0D7EF /* NewsPost.m in Sources */,
 				3412AC39234F384C00538F51 /* main.m in Sources */,
 				34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */,
+				34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */,
 				34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */,
 				34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */,
+				34DEC74A2355D70F00F5FB4E /* CollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
