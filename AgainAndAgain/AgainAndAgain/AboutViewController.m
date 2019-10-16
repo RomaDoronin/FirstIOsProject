@@ -1,24 +1,22 @@
 //
-//  ViewControllerOtherWindow.m
+//  AboutViewController.m
 //  AgainAndAgain
 //
-//  Created by Roman Doronin on 14.10.19.
+//  Created by Roman Doronin on 16.10.19.
 //  Copyright (c) 2019 Roman Doronin. All rights reserved.
 //
 
-#import "ViewControllerOtherWindow.h"
+#import "AboutViewController.h"
 
-@interface ViewControllerOtherWindow ()
-
+@interface AboutViewController ()
 
 @end
 
-@implementation ViewControllerOtherWindow
+@implementation AboutViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.outputText.text = self.someText;
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>14877F68-A6A9-4584-8486-62220CF68652</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>AgainAndAgain</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>7BA9AB96006624E2C2D0D35B2D6D324010E79C1B</key>
 		<string>https://github.com/RomaDoronin/FirstIOsProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AgainAndAgain/AgainAndAgain.xcodeproj/project.xcworkspace</string>
+	<string>AgainAndAgain/AgainAndAgain.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7BA9AB96006624E2C2D0D35B2D6D324010E79C1B</key>

@@ -8,7 +8,7 @@
 
 #import "FindViewController.h"
 #import "DetailViewController.h"
-#import "ViewController.h"
+#import "ResizeImages.h"
 
 @interface FindViewController () {
     NewsSet *filteredNewsSet;
@@ -52,12 +52,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (isFiltered) {
-        cell.imageView.image = [ViewController imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
         cell.textLabel.text = [filteredNewsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [filteredNewsSet getAtIndex:indexPath.row].subtitle;
     }
     else {
-        cell.imageView.image = [ViewController imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
         cell.textLabel.text = [self.newsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [self.newsSet getAtIndex:indexPath.row].subtitle;
     }

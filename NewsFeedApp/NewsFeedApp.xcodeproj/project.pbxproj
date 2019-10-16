@@ -22,6 +22,9 @@
 		34DEC74A2355D70F00F5FB4E /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7492355D70F00F5FB4E /* CollectionViewController.m */; };
 		34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC74C2355D85F00F5FB4E /* CollectionViewCell.m */; };
 		34DEC7512355FCD400F5FB4E /* THSHTTPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7502355FCD400F5FB4E /* THSHTTPCommunication.m */; };
+		34DF60E8235757BC005FDB23 /* ParseDatetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60E7235757BC005FDB23 /* ParseDatetime.m */; };
+		34DF60EC23575932005FDB23 /* ResizeImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EB23575932005FDB23 /* ResizeImages.m */; };
+		34DF60F023575E1E005FDB23 /* OperationWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EF23575E1E005FDB23 /* OperationWithArray.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,12 @@
 		34DEC74C2355D85F00F5FB4E /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		34DEC74F2355FCD400F5FB4E /* THSHTTPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THSHTTPCommunication.h; sourceTree = "<group>"; };
 		34DEC7502355FCD400F5FB4E /* THSHTTPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THSHTTPCommunication.m; sourceTree = "<group>"; };
+		34DF60E6235757BC005FDB23 /* ParseDatetime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseDatetime.h; sourceTree = "<group>"; };
+		34DF60E7235757BC005FDB23 /* ParseDatetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDatetime.m; sourceTree = "<group>"; };
+		34DF60EA23575932005FDB23 /* ResizeImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeImages.h; sourceTree = "<group>"; };
+		34DF60EB23575932005FDB23 /* ResizeImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeImages.m; sourceTree = "<group>"; };
+		34DF60EE23575E1E005FDB23 /* OperationWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationWithArray.h; sourceTree = "<group>"; };
+		34DF60EF23575E1E005FDB23 /* OperationWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationWithArray.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +114,9 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				34DF60ED23575DF2005FDB23 /* OperationWithArray */,
+				34DF60E923575911005FDB23 /* OperationWithImages */,
+				34DF60E52357578F005FDB23 /* ParseDatetime */,
 				34DEC74E2355FC9400F5FB4E /* THSGTTPCommunication */,
 				34DEC7442355D22800F5FB4E /* Grid */,
 				34DEC7402354C5EA00F5FB4E /* Filter */,
@@ -205,6 +217,33 @@
 				34DEC7502355FCD400F5FB4E /* THSHTTPCommunication.m */,
 			);
 			name = THSGTTPCommunication;
+			sourceTree = "<group>";
+		};
+		34DF60E52357578F005FDB23 /* ParseDatetime */ = {
+			isa = PBXGroup;
+			children = (
+				34DF60E6235757BC005FDB23 /* ParseDatetime.h */,
+				34DF60E7235757BC005FDB23 /* ParseDatetime.m */,
+			);
+			name = ParseDatetime;
+			sourceTree = "<group>";
+		};
+		34DF60E923575911005FDB23 /* OperationWithImages */ = {
+			isa = PBXGroup;
+			children = (
+				34DF60EA23575932005FDB23 /* ResizeImages.h */,
+				34DF60EB23575932005FDB23 /* ResizeImages.m */,
+			);
+			name = OperationWithImages;
+			sourceTree = "<group>";
+		};
+		34DF60ED23575DF2005FDB23 /* OperationWithArray */ = {
+			isa = PBXGroup;
+			children = (
+				34DF60EE23575E1E005FDB23 /* OperationWithArray.h */,
+				34DF60EF23575E1E005FDB23 /* OperationWithArray.m */,
+			);
+			name = OperationWithArray;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,7 +351,10 @@
 				34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */,
 				34D74CD12350821300E0D7EF /* NewsPost.m in Sources */,
 				3412AC39234F384C00538F51 /* main.m in Sources */,
+				34DF60EC23575932005FDB23 /* ResizeImages.m in Sources */,
 				34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */,
+				34DF60F023575E1E005FDB23 /* OperationWithArray.m in Sources */,
+				34DF60E8235757BC005FDB23 /* ParseDatetime.m in Sources */,
 				34DEC7512355FCD400F5FB4E /* THSHTTPCommunication.m in Sources */,
 				34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */,
 				34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "ViewController.h"
+#import "ParseDatetime.h"
 
 @interface DetailViewController ()
 
@@ -27,7 +27,7 @@
         self.textUI.text = @"";
     }
     self.imageUI.image = [UIImage imageWithData:self.newsPost.realImage];
-    self.datetimeUI.text = [ViewController parseDatetime:self.newsPost.datetime];
+    self.datetimeUI.text = [ParseDatetime parseDatetime:self.newsPost.datetime];
     self.sourceUI.text = self.newsPost.source;
 }
 
