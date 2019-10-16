@@ -59,7 +59,7 @@
 
 - (void)getNewsFromServer {
     THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
-    NSString *apiKey = @"6ecb910089e34c039b4c3338f2afb140";
+    NSString *apiKey = @"cad5ad6bd4af44e0aab5f6f708d5e621";
     NSString *stringURL = [NSString stringWithFormat:@"%@%@", @"https://newsapi.org/v2/everything?q=Apple&from=2019-10-15&sortBy=popularity&apiKey=", apiKey];
     NSURL *url = [NSURL URLWithString:stringURL];
     
@@ -79,7 +79,7 @@
                     
                     BOOL isDuplicate = NO;
                     for (NSString *sourceCount in newsSource) {
-                        if (sourceCount == sourceName) {
+                        if ([sourceCount isEqualToString:sourceName]) {
                             isDuplicate = YES;
                         }
                     }
