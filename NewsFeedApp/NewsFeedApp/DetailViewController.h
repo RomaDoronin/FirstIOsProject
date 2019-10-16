@@ -21,4 +21,6 @@
 
 @property NewsPost * newsPost;
 
+- (IBAction)sharePressed:(UIButton *)sender;
+
 @end

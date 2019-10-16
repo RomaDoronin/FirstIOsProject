@@ -20,7 +20,12 @@
     
     self.titleTextView.text = self.newsPost.title;
     self.subtitleTextView.text = self.newsPost.subtitle;
-    self.textUI.text = self.newsPost.text;
+    if (self.newsPost.text) {
+        self.textUI.text = self.newsPost.text;
+    }
+    else {
+        self.textUI.text = @"";
+    }
     self.imageUI.image = [UIImage imageWithData:self.newsPost.realImage];
     self.datetimeUI.text = [ViewController parseDatetime:self.newsPost.datetime];
     self.sourceUI.text = self.newsPost.source;
@@ -39,5 +44,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)sharePressed:(UIButton *)sender {
+    NSArray *sharedData = @[self.titleTextView.text,
+                            self.subtitleTextView.text,
+                            self.textUI.text,
+                            self.imageUI.image,
+                            self.datetimeUI.text,
+                            self.sourceUI.text
+                            ];
+    
+    UIActivityViewController *activityView = [[UIActivityViewController alloc] initWithActivityItems: sharedData applicationActivities:nil];
+    activityView.popoverPresentationController.sourceView = self.view;
+    
+    [self presentViewController:activityView animated:YES completion:nil];
+}
 
 @end

@@ -14,7 +14,9 @@
 #import "THSHTTPCommunication.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate> {
-    @private NSMutableArray *newsSource;
+@private
+    NSMutableArray *newsSource;
+    BOOL isNewPageLoaded;
 }
 
 @property NewsSet * sortedNewsSet;
@@ -33,34 +35,23 @@
     [super viewDidLoad];
     isHardcode = NO;
     isNeedToSort = YES;
+    isNewPageLoaded = NO;
     
     newSet = [[NewsSet alloc] init];
     
-    if (isHardcode) {
-        [newSet addNews:@"TITLE 1"  :@"SUBTITLE 1"  :@"TEXT 1"  :@"image1" :@"2019-10-03T11:04:19Z": @"Mashable"];
-        [newSet addNews:@"TITLE 2"  :@"SUBTITLE 2"  :@"TEXT 2"  :@"image2" :@"2019-11-30T11:04:19Z": @"Chet.com"];
-        [newSet addNews:@"TITLE 3"  :@"SUBTITLE 3"  :@"TEXT 3"  :@"image1" :@"2019-10-15T11:04:19Z": @"BBC"];
-        [newSet addNews:@"TITLE 4"  :@"SUBTITLE 4"  :@"TEXT 4"  :@"image2" :@"2019-11-28T11:04:19Z": @"Mashable"];
-        [newSet addNews:@"TITLE 5"  :@"SUBTITLE 5"  :@"TEXT 5"  :@"image1" :@"2019-11-30T12:04:19Z": @"The Next Web"];
-        [newSet addNews:@"TITLE 6"  :@"SUBTITLE 6"  :@"TEXT 6"  :@"image2" :@"2019-10-10T11:04:19Z": @"BBC"];
-        [newSet addNews:@"TITLE 7"  :@"SUBTITLE 7"  :@"TEXT 7"  :@"image1" :@"2019-11-25T11:04:19Z": @"BBC"];
-        [newSet addNews:@"TITLE 8"  :@"SUBTITLE 8"  :@"TEXT 8"  :@"image2" :@"2019-10-14T11:04:19Z": @"BBC"];
-        [newSet addNews:@"TITLE 9"  :@"SUBTITLE 9"  :@"TEXT 9"  :@"image1" :@"2019-11-25T11:03:19Z": @"Hipertextual.com"];
-        [newSet addNews:@"TITLE 10" :@"SUBTITLE 10" :@"TEXT 10" :@"image2" :@"2019-11-27T11:03:19Z": @"Mashable"];
-        [newSet addNews:@"TITLE 11" :@"SUBTITLE 11" :@"TEXT 11" :@"image1" :@"2019-10-26T11:04:19Z": @"Chet.com"];
-        [newSet addNews:@"TITLE 12" :@"SUBTITLE 12" :@"TEXT 12" :@"image2" :@"2019-11-13T11:04:19Z": @"Hipertextual.com"];
-    }
-    else {
-        [self getNewsFromServer];
-    }
+    [self getNewsFromServer: @"1"];
     
     self.isSort = NO;
 }
 
-- (void)getNewsFromServer {
+- (void)getNewsFromServer:(NSString *)page {
     THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
-    NSString *apiKey = @"8bb48db696e947158f151289c7d05da8";
-    NSString *stringURL = [NSString stringWithFormat:@"%@%@", @"https://newsapi.org/v2/everything?q=Apple&from=2019-10-15&sortBy=popularity&apiKey=", apiKey];
+    NSString *apiKey = @"cef54047a9d94e41ad1ba8ffaa5d6bee";
+    NSString *keyWord = @"Apple";
+    NSString *date = @"2019-10-15";
+    NSString *sortBy = @"popularity";
+    NSString *pageSize = @"20";
+    NSString *stringURL = [NSString stringWithFormat:@"https://newsapi.org/v2/everything?q=%@&from=%@&sortBy=%@&apiKey=%@&pageSize=%@&page=%@", keyWord, date, sortBy, apiKey, pageSize, page];
     NSURL *url = [NSURL URLWithString:stringURL];
     
     [http retrieveURL:url successBlock:^(NSData *response) {
@@ -93,6 +84,7 @@
                 }
                 
                 [self.table reloadData];
+                isNewPageLoaded = NO;
             }
         }
     }];
@@ -227,6 +219,19 @@
     gridView.newsSet = newSet;
     
     [self.navigationController pushViewController:gridView animated:YES];
+}
+
+
+// Individual rows can opt out of having the -editing property set for them. If not implemented, all rows are assumed to be editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ((indexPath.row == newSet.getCount - 5) && (!isNewPageLoaded)) {
+        isNewPageLoaded = YES;
+        NSInteger page = newSet.getCount / 20 + 1;
+        [self getNewsFromServer: [NSString stringWithFormat:@"%d", page]];
+    }
+    
+    return YES;
 }
 
 @end
