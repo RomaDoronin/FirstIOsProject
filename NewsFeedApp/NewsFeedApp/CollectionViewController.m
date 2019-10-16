@@ -9,6 +9,7 @@
 #import "CollectionViewController.h"
 #import "CollectionViewCell.h"
 #import "DetailViewController.h"
+#import "ViewController.h"
 
 @interface CollectionViewController ()
 
@@ -64,7 +65,7 @@ static NSString * const reuseIdentifier = @"gridCell";
     NewsPost * post = [newsSet getAtIndex:indexPath.row];
     
     // Configure the cell
-    cell.image.image = [UIImage imageNamed:post.image];
+    cell.image.image = [UIImage imageWithData:post.realImage];
     cell.titleLable.text = post.title;
     
     return cell;

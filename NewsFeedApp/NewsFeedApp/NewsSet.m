@@ -65,4 +65,10 @@
     return filtredNewsSet;
 }
 
+
+- (void) setRealImage : (NSData *) realImage : (long) index {
+    NewsPost *post = [self getAtIndex:index];
+    post.realImage = realImage;
+}
+
 @end

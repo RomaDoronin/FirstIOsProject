@@ -19,5 +19,6 @@
 - (long) getCount;
 - (NewsPost *) getAtIndex : (long) index;
 - (NewsSet *) sortByDatetime;
+- (void) setRealImage : (NSData *) realImage : (long) index;
 
 @end

@@ -59,7 +59,7 @@
 
 - (void)getNewsFromServer {
     THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
-    NSString *apiKey = @"cad5ad6bd4af44e0aab5f6f708d5e621";
+    NSString *apiKey = @"8bb48db696e947158f151289c7d05da8";
     NSString *stringURL = [NSString stringWithFormat:@"%@%@", @"https://newsapi.org/v2/everything?q=Apple&from=2019-10-15&sortBy=popularity&apiKey=", apiKey];
     NSURL *url = [NSURL URLWithString:stringURL];
     
@@ -75,7 +75,9 @@
                 for (NSDictionary *article in articles) {
                     NSDictionary *source = [article objectForKey:@"source"];
                     NSString *sourceName = [source objectForKey:@"name"];
-                    [newSet addNews:[article objectForKey:@"title"] :[article objectForKey:@"description"] :[article objectForKey:@"content"] :@"image1" :[article objectForKey:@"publishedAt"] :sourceName];
+                    NSString *imageURL = [article objectForKey:@"urlToImage"];
+                    
+                    [newSet addNews:[article objectForKey:@"title"] :[article objectForKey:@"description"] :[article objectForKey:@"content"] :imageURL :[article objectForKey:@"publishedAt"] :sourceName];
                     
                     BOOL isDuplicate = NO;
                     for (NSString *sourceCount in newsSource) {
@@ -86,9 +88,27 @@
                     if (!isDuplicate) {
                         [newsSource addObject:sourceName];
                     }
+                    
+                    [self getImageFromURL :imageURL :(newSet.getCount - 1)];
                 }
+                
                 [self.table reloadData];
             }
+        }
+    }];
+    
+    
+}
+
+- (void)getImageFromURL:(NSString *)stringURL :(NSInteger)index {
+    THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
+    NSURL *url = [NSURL URLWithString:stringURL];
+    
+    [http retrieveURL:url successBlock:^(NSData *response) {
+        if (response) {
+            [newSet setRealImage:response :index];
+            
+            [self.table reloadData];
         }
     }];
 }
@@ -126,6 +146,14 @@
     return [NSString stringWithFormat:@"%c%c.%c%c %c%c:%c%c", day1, day2, month1, month2, hour1, hour2, minute1, minute2];
 }
 
++ (UIImage *)imagesWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
@@ -139,7 +167,7 @@
         post = [newSet getAtIndex:indexPath.row];
     }
     
-    cell.imageView.image = [UIImage imageNamed:post.image];
+    cell.imageView.image = [ViewController imagesWithImage:[UIImage imageWithData:post.realImage] scaledToSize:CGSizeMake(70, 70)];
     cell.textLabel.text = post.title;
     cell.detailTextLabel.text = [ViewController parseDatetime:post.datetime];
     
@@ -198,6 +226,7 @@
     
     gridView.newsSet = newSet;
     
-    [self.navigationController pushViewController:gridView animated:YES];}
+    [self.navigationController pushViewController:gridView animated:YES];
+}
 
 @end

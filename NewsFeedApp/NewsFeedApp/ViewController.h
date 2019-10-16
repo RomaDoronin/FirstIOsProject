@@ -25,6 +25,7 @@
 - (IBAction)filterActionButton:(UIButton *)sender;
 
 + (NSString *)parseDatetime:(NSString *)datetime;
++ (UIImage *)imagesWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end
 

@@ -21,7 +21,7 @@
     self.titleTextView.text = self.newsPost.title;
     self.subtitleTextView.text = self.newsPost.subtitle;
     self.textUI.text = self.newsPost.text;
-    self.imageUI.image = [UIImage imageNamed:self.newsPost.image];
+    self.imageUI.image = [UIImage imageWithData:self.newsPost.realImage];
     self.datetimeUI.text = [ViewController parseDatetime:self.newsPost.datetime];
     self.sourceUI.text = self.newsPost.source;
 }

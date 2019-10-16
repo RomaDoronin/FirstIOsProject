@@ -8,6 +8,7 @@
 
 #import "FilterViewController.h"
 #import "DetailViewController.h"
+#import "ViewController.h"
 
 @interface FilterViewController () {
 @private
@@ -56,7 +57,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (isFiltered) {
-        cell.imageView.image = [UIImage imageNamed:[filteredNewsSet getAtIndex:indexPath.row].image];
+        cell.imageView.image = [ViewController imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
         cell.textLabel.text = [filteredNewsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [filteredNewsSet getAtIndex:indexPath.row].source;
     }

@@ -14,6 +14,7 @@
 @property NSString * subtitle;
 @property NSString * text;
 @property NSString * image;
+@property NSData * realImage;
 @property NSString * datetime;
 @property NSString * source;
 
