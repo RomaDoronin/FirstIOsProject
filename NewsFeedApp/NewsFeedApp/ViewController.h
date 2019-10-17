@@ -10,10 +10,7 @@
 
 @class NewsSet;
 
-@interface ViewController : UIViewController {
-@private
-    NewsSet * newSet;
-}
+@interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ButtonFind;

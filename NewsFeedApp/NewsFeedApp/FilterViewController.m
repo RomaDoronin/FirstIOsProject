@@ -76,11 +76,11 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [NSString stringWithFormat:@"%@", [newsSource objectAtIndex:row]];
+    return [NSString stringWithFormat:@"%@", newsSource[row]];
 }
 
 - (IBAction)filterActionButton:(UIBarButtonItem *)sender {
-    NSString * searchSource = [newsSource objectAtIndex:pickerCurrRow];
+    NSString * searchSource = newsSource[pickerCurrRow];
     isFiltered = YES;
     filteredNewsSet = [[NewsSet alloc] init];
     

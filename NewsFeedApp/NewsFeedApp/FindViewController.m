@@ -18,6 +18,8 @@
 
 @end
 
+static const NSInteger kImageSize = 70;
+
 @implementation FindViewController
 
 - (void)viewDidLoad {
@@ -40,16 +42,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"findCell";
-    const NSInteger IMAGE_SIZE = 70;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (isFiltered) {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(kImageSize, kImageSize)];
         cell.textLabel.text = [filteredNewsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [filteredNewsSet getAtIndex:indexPath.row].subtitle;
     }
     else {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(kImageSize, kImageSize)];
         cell.textLabel.text = [self.newsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [self.newsSet getAtIndex:indexPath.row].subtitle;
     }

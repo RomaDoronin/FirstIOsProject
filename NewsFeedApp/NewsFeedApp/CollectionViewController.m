@@ -14,22 +14,14 @@
 
 @end
 
+static NSString * const reuseIdentifier = @"gridCell";
+
 @implementation CollectionViewController
 
 @synthesize newsSet;
 
-static NSString * const reuseIdentifier = @"gridCell";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
 }
 
 #pragma mark <UICollectionViewDataSource>

@@ -18,16 +18,20 @@
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate> {
 @private
+    NewsSet * newsSet;
     BOOL isNewPageLoaded;
     BOOL isNeedToSort;
     BOOL isSort;
-    NSInteger pageSize;
     NSMutableArray *newsSource;
     NewsSet * sortedNewsSet;
     NewsSet * tmpNewsSet;
 }
 
 @end
+
+static const NSInteger kPageSize = 20;
+static const NSInteger kMaxNewsNum = 100;
+static const NSInteger kPredNewsNumOfLoading = 5;
 
 @implementation ViewController
 
@@ -41,13 +45,11 @@
     isNewPageLoaded = NO;
     isNeedToSort = YES;
     isSort = NO;
-    pageSize = 20;
     
-    newSet = [[NewsSet alloc] init];
+    newsSet = [[NewsSet alloc] init];
     newsSource = [[NSMutableArray alloc] init];
     
     NSString *numFirstPage = @"1";
-    
     [self getNewsFromURL: numFirstPage];
 }
 
@@ -57,7 +59,7 @@
     
     NSString *apiKey = @"cef54047a9d94e41ad1ba8ffaa5d6bee";
     NSString *keyWord = @"Apple";
-    NSString *date = @"2019-10-15";
+    NSString *date = @"2019-10-16";
     NSString *sortBy = @"popularity";
     
     NSString *stringURL = [NSString stringWithFormat:@"https://newsapi.org/v2/everything?q=%@&from=%@&sortBy=%@&apiKey=%@&pageSize=%d&page=%@",
@@ -65,7 +67,7 @@
                            date,
                            sortBy,
                            apiKey,
-                           pageSize,
+                           kPageSize,
                            page];
     
     NSURL *url = [NSURL URLWithString:stringURL];
@@ -79,18 +81,18 @@
             if (data[@"articles"]) {
                 NSArray *articles = data[@"articles"];
                 for (NSDictionary *article in articles) {
-                    NSDictionary *source = [article objectForKey:@"source"];
-                    NSString *sourceName = [source objectForKey:@"name"];
-                    NSString *imageURL = [article objectForKey:@"urlToImage"];
+                    NSDictionary *source = article[@"source"];
+                    NSString *sourceName = source[@"name"];
+                    NSString *imageURL = article[@"urlToImage"];
                     
-                    [newSet addNews:[article objectForKey:@"title"] :[article objectForKey:@"description"] :[article objectForKey:@"content"] :imageURL :[article objectForKey:@"publishedAt"] :sourceName];
+                    [newsSet addNews:article[@"title"] :article[@"description"] :article[@"content"] :imageURL :article[@"publishedAt"] :sourceName];
                     
                     
                     if (![OperationWithArray checkForElementInArray :newsSource :sourceName]) {
                         [newsSource addObject:sourceName];
                     }
                     
-                    [self getImageFromURL :imageURL :(newSet.getCount - 1)];
+                    [self getImageFromURL :imageURL :(newsSet.getCount - 1)];
                 }
                 
                 [self.table reloadData];
@@ -106,7 +108,7 @@
     
     [http retrieveURL:url successBlock:^(NSData *response) {
         if (response) {
-            [newSet setRealImage:response :index];
+            [newsSet setRealImage:response :index];
             
             [self.table reloadData];
         }
@@ -115,7 +117,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [newSet getCount];
+    return [newsSet getCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,7 +126,7 @@
     
     NewsPost * post = [[NewsPost alloc] init];
     
-    post = [newSet getAtIndex:indexPath.row];
+    post = [newsSet getAtIndex:indexPath.row];
     
     cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:post.realImage] scaledToSize:CGSizeMake(70, 70)];
     cell.textLabel.text = post.title;
@@ -138,18 +140,21 @@
     
     DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
     
-    detailView.newsPost = [newSet getAtIndex:indexPath.row];
+    detailView.newsPost = [newsSet getAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:detailView animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger PRED_NEWS_NUM_OF_LOADING = 5;
+    if (isSort) {
+        return YES;
+    }
     
-    if ((indexPath.row == newSet.getCount - PRED_NEWS_NUM_OF_LOADING) && (!isNewPageLoaded)) {
-        if (!isSort) {
+    if ((indexPath.row == newsSet.getCount - kPredNewsNumOfLoading) && (!isNewPageLoaded)) {
+        NSInteger page = newsSet.getCount / kPageSize + 1;
+        if (page < kMaxNewsNum / kPageSize) {
             isNewPageLoaded = YES;
-            NSInteger page = newSet.getCount / pageSize + 1;
+            isNeedToSort = YES;
             [self getNewsFromURL: [NSString stringWithFormat:@"%d", page]];
         }
     }
@@ -164,16 +169,16 @@
 - (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event {
     if (isNeedToSort) {
         isNeedToSort = NO;
-        sortedNewsSet = [newSet sortByDatetime];
+        sortedNewsSet = [newsSet sortByDatetime];
     }
     
     if (isSort) {
-        newSet = tmpNewsSet;
+        newsSet = tmpNewsSet;
         isSort = NO;
     }
     else {
-        tmpNewsSet = newSet;
-        newSet = sortedNewsSet;
+        tmpNewsSet = newsSet;
+        newsSet = sortedNewsSet;
         isSort = YES;
     }
     
@@ -183,7 +188,7 @@
 - (IBAction)findButton:(UIBarButtonItem *)sender {
     FindViewController * findView = [self.storyboard instantiateViewControllerWithIdentifier:@"findView"];
     
-    findView.newsSet = newSet;
+    findView.newsSet = newsSet;
     
     [self.navigationController pushViewController:findView animated:YES];
 }
@@ -191,7 +196,7 @@
 - (IBAction)filterActionButton:(UIButton *)sender {
     FilterViewController * filterView = [self.storyboard instantiateViewControllerWithIdentifier:@"filterView"];
     
-    filterView.newsSet = newSet;
+    filterView.newsSet = newsSet;
     filterView.newsSource = newsSource;
     
     [self.navigationController pushViewController:filterView animated:YES];
@@ -204,7 +209,7 @@
 - (IBAction)gridActionButton:(UIBarButtonItem *)sender {
     CollectionViewController * gridView = [self.storyboard instantiateViewControllerWithIdentifier:@"gridView"];
     
-    gridView.newsSet = newSet;
+    gridView.newsSet = newsSet;
     
     [self.navigationController pushViewController:gridView animated:YES];
 }

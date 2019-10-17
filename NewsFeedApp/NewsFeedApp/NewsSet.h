@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NewsPost.h"
 
-@interface NewsSet : NSObject{
-    NSMutableArray * newsPostArray;
-    bool isFirstAdd;
-}
+@interface NewsSet : NSObject
 
 - (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime : (NSString *) source;
 - (void) addNews : (NewsPost *) post;

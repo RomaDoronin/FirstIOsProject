@@ -8,6 +8,18 @@
 
 #import "ParseDatetime.h"
 
+static const NSInteger kMonthPositionFirst = 5;
+static const NSInteger kMonthPositionSecond = 6;
+
+static const NSInteger kDayPositionFirst = 8;
+static const NSInteger kDayPositionSecond = 9;
+
+static const NSInteger kHourPositionFirst = 11;
+static const NSInteger kHourPositionSecond = 12;
+
+static const NSInteger kMinutePositionFirst = 14;
+static const NSInteger kMinutePositionSecond = 15;
+
 @implementation ParseDatetime
 
 + (NSString *)parseDatetime:(NSString *)datetime {
@@ -15,17 +27,17 @@
         return @"";
     }
     
-    char month1 = [datetime characterAtIndex:5];
-    char month2 = [datetime characterAtIndex:6];
+    char month1 = [datetime characterAtIndex:kMonthPositionFirst];
+    char month2 = [datetime characterAtIndex:kMonthPositionSecond];
     
-    char day1 = [datetime characterAtIndex:8];
-    char day2 = [datetime characterAtIndex:9];
+    char day1 = [datetime characterAtIndex:kDayPositionFirst];
+    char day2 = [datetime characterAtIndex:kDayPositionSecond];
     
-    char hour1 = [datetime characterAtIndex:11];
-    char hour2 = [datetime characterAtIndex:12];
+    char hour1 = [datetime characterAtIndex:kHourPositionFirst];
+    char hour2 = [datetime characterAtIndex:kHourPositionSecond];
     
-    char minute1 = [datetime characterAtIndex:14];
-    char minute2 = [datetime characterAtIndex:15];
+    char minute1 = [datetime characterAtIndex:kMinutePositionFirst];
+    char minute2 = [datetime characterAtIndex:kMinutePositionSecond];
     
     return [NSString stringWithFormat:@"%c%c.%c%c %c%c:%c%c", day1, day2, month1, month2, hour1, hour2, minute1, minute2];
 }

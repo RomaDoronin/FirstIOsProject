@@ -8,7 +8,11 @@
 
 #import "NewsSet.h"
 
-@implementation NewsSet
+@implementation NewsSet {
+@private
+    NSMutableArray * newsPostArray;
+    bool isFirstAdd;
+}
 
 - (id) init {
     self = [super init];
@@ -45,11 +49,11 @@
 }
 
 - (long) getCount {
-    return [newsPostArray count];
+    return newsPostArray.count;
 }
 
 - (NewsPost *) getAtIndex : (long) index {
-    return [newsPostArray objectAtIndex:index];
+    return newsPostArray[index];
 }
 
 - (NewsSet *) sortByDatetime {
