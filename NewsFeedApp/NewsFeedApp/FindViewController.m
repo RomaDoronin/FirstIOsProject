@@ -11,6 +11,7 @@
 #import "ResizeImages.h"
 
 @interface FindViewController () {
+@private
     NewsSet *filteredNewsSet;
     BOOL isFiltered;
 }
@@ -26,16 +27,6 @@
     self.searchBar.delegate = self;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
- */
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (isFiltered)
@@ -49,15 +40,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"findCell";
+    const NSInteger IMAGE_SIZE = 70;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (isFiltered) {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
         cell.textLabel.text = [filteredNewsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [filteredNewsSet getAtIndex:indexPath.row].subtitle;
     }
     else {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(70, 70)];
+        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
         cell.textLabel.text = [self.newsSet getAtIndex:indexPath.row].title;
         cell.detailTextLabel.text = [self.newsSet getAtIndex:indexPath.row].subtitle;
     }
