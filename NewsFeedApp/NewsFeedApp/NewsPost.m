@@ -10,12 +10,4 @@
 
 @implementation NewsPost
 
-@synthesize title;
-@synthesize subtitle;
-@synthesize text;
-@synthesize image;
-@synthesize realImage;
-@synthesize datetime;
-@synthesize source;
-
 @end
