@@ -154,21 +154,11 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     
     const NSInteger kImageSize = 80;
     
-    if (height != 0) {
-        result = width * kImageSize / height;
-    }
-    else
-    {
-        result = 0;
-    }
-    NSLog(@"Result: %d", result);
+    result = height ? width * kImageSize / height : 0;
+    
     UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
     
     cell.NewsImage.image = resizeImage;
-    
-    //cell.imageView.image = [UIImage imageWithData:post.realImage];[ResizeImages imagesWithImage:[UIImage imageWithData:post.realImage] scaledToSize:CGSizeMake(70, 70)];
-    //cell.textLabel.text = post.title;
-    //cell.detailTextLabel.text = [ParseDatetime parseDatetime:post.datetime];
     
     return cell;
 }
