@@ -25,6 +25,7 @@
 		34DF60E8235757BC005FDB23 /* ParseDatetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60E7235757BC005FDB23 /* ParseDatetime.m */; };
 		34DF60EC23575932005FDB23 /* ResizeImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EB23575932005FDB23 /* ResizeImages.m */; };
 		34DF60F023575E1E005FDB23 /* OperationWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EF23575E1E005FDB23 /* OperationWithArray.m */; };
+		34DF6124235F15C4005FDB23 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF6123235F15C4005FDB23 /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,8 @@
 		34DF60EB23575932005FDB23 /* ResizeImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeImages.m; sourceTree = "<group>"; };
 		34DF60EE23575E1E005FDB23 /* OperationWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationWithArray.h; sourceTree = "<group>"; };
 		34DF60EF23575E1E005FDB23 /* OperationWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationWithArray.m; sourceTree = "<group>"; };
+		34DF6122235F15C4005FDB23 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		34DF6123235F15C4005FDB23 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				3412AC3E234F384C00538F51 /* ViewController.m */,
 				3412AC37234F384C00538F51 /* Info.plist */,
 				3412AC38234F384C00538F51 /* main.m */,
+				34DF6122235F15C4005FDB23 /* TableViewCell.h */,
+				34DF6123235F15C4005FDB23 /* TableViewCell.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */,
 				34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */,
 				34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */,
+				34DF6124235F15C4005FDB23 /* TableViewCell.m in Sources */,
 				34DEC74A2355D70F00F5FB4E /* CollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

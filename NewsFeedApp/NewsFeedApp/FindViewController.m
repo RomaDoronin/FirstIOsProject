@@ -76,24 +76,31 @@ static const NSInteger kImageSize = 70;
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (searchText.length == 0) {
-        isFiltered = NO;
-    }
-    else {
-        isFiltered = YES;
-        filteredNewsSet = [[NewsSet alloc] init];
+    /*NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [queue addOperationWithBlock:^{*/
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (searchText.length == 0) {
+            isFiltered = NO;
+        }
+        else {
+            isFiltered = YES;
+            filteredNewsSet = [[NewsSet alloc] init]; // Memory CRASH maybe
         
-        for (long count = 0; count < [self.newsSet getCount]; count++) {
-            // Search for title
-            NewsPost *post = [self.newsSet getAtIndex:count];
-            NSRange nameRange = [post.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if (nameRange.location != NSNotFound) {
-                [filteredNewsSet addNews:post];
+            for (long count = 0; count < [self.newsSet getCount]; count++) {
+                // Search for title
+                NewsPost *post = [self.newsSet getAtIndex:count];
+                NSRange nameRange = [post.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
+                if (nameRange.location != NSNotFound) {
+                    [filteredNewsSet addNews:post];
+                }
             }
         }
-    }
     
-    [self.findTable reloadData];
+        [self.findTable reloadData];
+    });
+    
+    /*}];*/
 }
 
 @end

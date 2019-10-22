@@ -15,6 +15,7 @@
 #import "ParseDatetime.h"
 #import "ResizeImages.h"
 #import "OperationWithArray.h"
+#import "TableViewCell.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate> {
 @private
@@ -25,6 +26,8 @@
     NSMutableArray *newsSource;
     NewsSet * sortedNewsSet;
     NewsSet * tmpNewsSet;
+    
+    THSHTTPCommunication *http;
 }
 
 @end
@@ -42,6 +45,8 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 
 #pragma mark - Configuration
 -(void)configurationViewController {
+    http = [[THSHTTPCommunication alloc] init];
+    
     isNewPageLoaded = NO;
     isNeedToSort = YES;
     isSort = NO;
@@ -55,7 +60,7 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 
 #pragma mark - Get data from Server
 - (void)getNewsFromURL:(NSString *)page {
-    THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
+    //THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
     
     NSString *apiKey = @"cef54047a9d94e41ad1ba8ffaa5d6bee";
     NSString *keyWord = @"Apple";
@@ -92,8 +97,10 @@ static const NSInteger kPredNewsNumOfLoading = 5;
                         [newsSource addObject:sourceName];
                     }
                     
-                    [self getImageFromURL :imageURL :(newsSet.getCount - 1)];
+                    [self getImageFromURL :imageURL :(newsSet.getCount - kPageSize)];
                 }
+                // So so
+                /*[self getImageFromURL :articles[0][@"urlToImage"] :0];*/
                 
                 [self.table reloadData];
                 isNewPageLoaded = NO;
@@ -103,15 +110,24 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 }
 
 - (void)getImageFromURL:(NSString *)stringURL :(NSInteger)index {
-    THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
+    //THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
     NSURL *url = [NSURL URLWithString:stringURL];
+    
+    __block int insideIndex = index;
     
     [http retrieveURL:url successBlock:^(NSData *response) {
         if (response) {
-            [newsSet setRealImage:response :index];
+            [newsSet setRealImage:response :/*index*/insideIndex];
             
             [self.table reloadData];
+            
+            insideIndex++;
         }
+        
+        // So so
+        /*if (index < newsSet.getCount - 1) {
+            [self getImageFromURL :[newsSet getAtIndex:index + 1].image :index + 1];
+        }*/
     }];
 }
 
@@ -121,16 +137,38 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"customCell";
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
     NewsPost * post = [[NewsPost alloc] init];
     
     post = [newsSet getAtIndex:indexPath.row];
     
-    cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:post.realImage] scaledToSize:CGSizeMake(70, 70)];
-    cell.textLabel.text = post.title;
-    cell.detailTextLabel.text = [ParseDatetime parseDatetime:post.datetime];
+    cell.NewsTitle.text = post.title;
+    cell.NewsDatetime.text = [ParseDatetime parseDatetime:post.datetime];
+    UIImage *image = [UIImage imageWithData:post.realImage];
+    
+    NSInteger height = image.size.height;
+    NSInteger width = image.size.width;
+    NSInteger result;
+    
+    const NSInteger kImageSize = 80;
+    
+    if (height != 0) {
+        result = width * kImageSize / height;
+    }
+    else
+    {
+        result = 0;
+    }
+    NSLog(@"Result: %d", result);
+    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    
+    cell.NewsImage.image = resizeImage;
+    
+    //cell.imageView.image = [UIImage imageWithData:post.realImage];[ResizeImages imagesWithImage:[UIImage imageWithData:post.realImage] scaledToSize:CGSizeMake(70, 70)];
+    //cell.textLabel.text = post.title;
+    //cell.detailTextLabel.text = [ParseDatetime parseDatetime:post.datetime];
     
     return cell;
 }

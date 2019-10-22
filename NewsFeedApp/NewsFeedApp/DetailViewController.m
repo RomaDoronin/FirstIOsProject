@@ -19,12 +19,10 @@
     [super viewDidLoad];
     self.titleTextView.text = self.newsPost.title;
     self.subtitleTextView.text = self.newsPost.subtitle;
-    if (self.newsPost.text) {
-        self.textUI.text = self.newsPost.text;
+    if (self.newsPost.text == nil) {
+        self.newsPost.text = @"";
     }
-    else {
-        self.textUI.text = @"";
-    }
+    self.textUI.text = self.newsPost.text;
     self.imageUI.image = [UIImage imageWithData:self.newsPost.realImage];
     self.datetimeUI.text = [ParseDatetime parseDatetime:self.newsPost.datetime];
     self.sourceUI.text = self.newsPost.source;
