@@ -14,18 +14,15 @@
 
 @end
 
+const NSInteger kImageSize = 100;
+
 @implementation DetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     UIImage *image = [UIImage imageWithData:self.newsPost.realImage];
-    NSInteger height = image.size.height;
-    NSInteger width = image.size.width;
-    NSInteger result;
-    const NSInteger kImageSize = 100;
-    result = height ? width * kImageSize / height : 0;
-    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
     
     self.titleTextView.text = self.newsPost.title;
     self.subtitleTextView.text = self.newsPost.subtitle;

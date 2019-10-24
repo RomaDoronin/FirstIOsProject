@@ -24,11 +24,17 @@
 @synthesize newsSet;
 @synthesize newsSource;
 
+- (id)init {
+    if (self = [super init]) {
+        isFiltered = NO;
+        pickerCurrRow = 0;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    isFiltered = NO;
-    pickerCurrRow = 0;
 }
 
 #pragma mark - UITableViewDataSource

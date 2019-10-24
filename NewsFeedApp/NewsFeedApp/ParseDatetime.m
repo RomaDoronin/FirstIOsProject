@@ -23,8 +23,9 @@ static const NSInteger kMinutePositionSecond = 15;
 @implementation ParseDatetime
 
 + (NSString *)parseDatetime:(NSString *)datetime {
-    if (datetime.length == 0) {
-        return @"";
+    if (datetime.length < 16) {
+        NSException *myException = [NSException exceptionWithName:@"DatetimeMustBeAtLeast16" reason:@"The length of the datetime must be at least 16" userInfo:nil];
+        @throw myException;
     }
     
     char month1 = [datetime characterAtIndex:kMonthPositionFirst];

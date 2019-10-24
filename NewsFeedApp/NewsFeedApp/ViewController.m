@@ -146,17 +146,10 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     
     cell.NewsTitle.text = post.title;
     cell.NewsDatetime.text = [ParseDatetime parseDatetime:post.datetime];
+    
     UIImage *image = [UIImage imageWithData:post.realImage];
-    
-    NSInteger height = image.size.height;
-    NSInteger width = image.size.width;
-    NSInteger result;
-    
-    const NSInteger kImageSize = 80;
-    
-    result = height ? width * kImageSize / height : 0;
-    
-    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    const NSInteger kImageSize = 80;    
+    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
     
     cell.NewsImage.image = resizeImage;
     

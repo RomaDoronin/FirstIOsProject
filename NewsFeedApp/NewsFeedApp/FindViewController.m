@@ -21,11 +21,16 @@
 
 @implementation FindViewController
 
+- (id)init {
+    if (self = [super init]) {
+        isFiltered = NO;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    isFiltered = NO;
-    self.searchBar.delegate = self;
 }
 
 #pragma mark - UITableViewDataSource
@@ -54,16 +59,8 @@
     
     NewsPost *post = [outputSet getAtIndex:indexPath.row];
     UIImage *image = [UIImage imageWithData:post.realImage];
-    
-    NSInteger height = image.size.height;
-    NSInteger width = image.size.width;
-    NSInteger result;
-    
-    const NSInteger kImageSize = 80;
-    
-    result = height ? width * kImageSize / height : 0;
-    
-    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    const NSInteger kImageSize = 80;    
+    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
     
     cell.imageFind.image = resizeImage;
     cell.lableFindTitle.text = [outputSet getAtIndex:indexPath.row].title;
@@ -90,16 +87,13 @@
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    /*NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue addOperationWithBlock:^{*/
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (searchText.length == 0) {
             isFiltered = NO;
         }
         else {
             isFiltered = YES;
-            filteredNewsSet = [[NewsSet alloc] init]; // Memory CRASH maybe
+            filteredNewsSet = [[NewsSet alloc] init];
         
             for (long count = 0; count < [self.newsSet getCount]; count++) {
                 // Search for title
@@ -113,8 +107,6 @@
     
         [self.findTable reloadData];
     });
-    
-    /*}];*/
 }
 
 @end

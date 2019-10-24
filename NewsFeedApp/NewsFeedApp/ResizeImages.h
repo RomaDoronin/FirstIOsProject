@@ -11,6 +11,7 @@
 
 @interface ResizeImages : NSObject
 
++ (UIImage *)resizeImage:(UIImage *)image KeepingProportionByOneSide:(NSInteger)imageSize;
 + (UIImage *)imagesWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 @end
