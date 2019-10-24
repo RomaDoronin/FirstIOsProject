@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "ParseDatetime.h"
+#import "ResizeImages.h"
 
 @interface DetailViewController ()
 
@@ -17,13 +18,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIImage *image = [UIImage imageWithData:self.newsPost.realImage];
+    NSInteger height = image.size.height;
+    NSInteger width = image.size.width;
+    NSInteger result;
+    const NSInteger kImageSize = 100;
+    result = height ? width * kImageSize / height : 0;
+    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    
     self.titleTextView.text = self.newsPost.title;
     self.subtitleTextView.text = self.newsPost.subtitle;
     if (self.newsPost.text == nil) {
         self.newsPost.text = @"";
     }
     self.textUI.text = self.newsPost.text;
-    self.imageUI.image = [UIImage imageWithData:self.newsPost.realImage];
+    self.imageUI.image = resizeImage;
     self.datetimeUI.text = [ParseDatetime parseDatetime:self.newsPost.datetime];
     self.sourceUI.text = self.newsPost.source;
 }

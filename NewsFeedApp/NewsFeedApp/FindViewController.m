@@ -9,6 +9,7 @@
 #import "FindViewController.h"
 #import "DetailViewController.h"
 #import "ResizeImages.h"
+#import "FindTableViewCell.h"
 
 @interface FindViewController () {
 @private
@@ -17,8 +18,6 @@
 }
 
 @end
-
-static const NSInteger kImageSize = 70;
 
 @implementation FindViewController
 
@@ -41,19 +40,34 @@ static const NSInteger kImageSize = 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellId = @"findCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"customCell";
+    FindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
+    NewsSet *outputSet;
     
     if (isFiltered) {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[filteredNewsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(kImageSize, kImageSize)];
-        cell.textLabel.text = [filteredNewsSet getAtIndex:indexPath.row].title;
-        cell.detailTextLabel.text = [filteredNewsSet getAtIndex:indexPath.row].subtitle;
+        outputSet = filteredNewsSet;
     }
     else {
-        cell.imageView.image = [ResizeImages imagesWithImage:[UIImage imageWithData:[self.newsSet getAtIndex:indexPath.row].realImage] scaledToSize:CGSizeMake(kImageSize, kImageSize)];
-        cell.textLabel.text = [self.newsSet getAtIndex:indexPath.row].title;
-        cell.detailTextLabel.text = [self.newsSet getAtIndex:indexPath.row].subtitle;
+        outputSet = self.newsSet;
     }
+    
+    NewsPost *post = [outputSet getAtIndex:indexPath.row];
+    UIImage *image = [UIImage imageWithData:post.realImage];
+    
+    NSInteger height = image.size.height;
+    NSInteger width = image.size.width;
+    NSInteger result;
+    
+    const NSInteger kImageSize = 80;
+    
+    result = height ? width * kImageSize / height : 0;
+    
+    UIImage *resizeImage = [ResizeImages imagesWithImage:image scaledToSize:CGSizeMake(result, kImageSize)];
+    
+    cell.imageFind.image = resizeImage;
+    cell.lableFindTitle.text = [outputSet getAtIndex:indexPath.row].title;
+    cell.lableFindDetail.text = [outputSet getAtIndex:indexPath.row].subtitle;
     
     return cell;
 }
