@@ -32,7 +32,7 @@
 
 @end
 
-static const NSInteger kPageSize = 20;
+static const int kPageSize = 20;
 static const NSInteger kMaxNewsNum = 100;
 static const NSInteger kPredNewsNumOfLoading = 5;
 
@@ -113,7 +113,7 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     //THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
     NSURL *url = [NSURL URLWithString:stringURL];
     
-    __block int insideIndex = index;
+    __block NSInteger insideIndex = index;
     
     [http retrieveURL:url successBlock:^(NSData *response) {
         if (response) {
@@ -183,7 +183,7 @@ static const NSInteger kPredNewsNumOfLoading = 5;
         if (page < kMaxNewsNum / kPageSize) {
             isNewPageLoaded = YES;
             isNeedToSort = YES;
-            [self getNewsFromURL: [NSString stringWithFormat:@"%d", page]];
+            [self getNewsFromURL: [NSString stringWithFormat:@"%ld", (long)page]];
         }
     }
     
