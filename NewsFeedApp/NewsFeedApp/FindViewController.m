@@ -87,25 +87,29 @@
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if (searchText.length == 0) {
             isFiltered = NO;
         }
         else {
+            NewsSet *newsSetCopy = self.newsSet.getCopy;
+            
             isFiltered = YES;
             filteredNewsSet = [[NewsSet alloc] init];
         
-            for (long count = 0; count < [self.newsSet getCount]; count++) {
+            for (long count = 0; count < [newsSetCopy getCount]; count++) {
                 // Search for title
-                NewsPost *post = [self.newsSet getAtIndex:count];
+                NewsPost *post = [newsSetCopy getAtIndex:count];
                 NSRange nameRange = [post.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
                 if (nameRange.location != NSNotFound) {
                     [filteredNewsSet addNews:post];
                 }
             }
         }
-    
-        [self.findTable reloadData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.findTable reloadData];
+        });
     });
 }
 

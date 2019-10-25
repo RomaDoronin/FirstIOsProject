@@ -14,9 +14,9 @@
 		3412AC47234F384C00538F51 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3412AC45234F384C00538F51 /* LaunchScreen.xib */; };
 		3412AC53234F384C00538F51 /* NewsFeedAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3412AC52234F384C00538F51 /* NewsFeedAppTests.m */; };
 		34D31CE123618FA500AF2F15 /* FindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE023618FA500AF2F15 /* FindTableViewCell.m */; };
-		34D31CE62361AFAF00AF2F15 /* OperationWithArrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE52361AFAE00AF2F15 /* OperationWithArrayTests.m */; };
 		34D31CE82361B26400AF2F15 /* OperationWithImagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE72361B26400AF2F15 /* OperationWithImagesTests.m */; };
 		34D31CEA2361B84400AF2F15 /* ParseDatetimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE92361B84400AF2F15 /* ParseDatetimeTests.m */; };
+		34D31CEE2362F0D600AF2F15 /* NewsDistributor.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CED2362F0D600AF2F15 /* NewsDistributor.m */; };
 		34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CCA234F6A8800E0D7EF /* NewsSet.m */; };
 		34D74CD12350821300E0D7EF /* NewsPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CD02350821300E0D7EF /* NewsPost.m */; };
 		34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */; };
@@ -28,7 +28,6 @@
 		34DEC7512355FCD400F5FB4E /* THSHTTPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DEC7502355FCD400F5FB4E /* THSHTTPCommunication.m */; };
 		34DF60E8235757BC005FDB23 /* ParseDatetime.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60E7235757BC005FDB23 /* ParseDatetime.m */; };
 		34DF60EC23575932005FDB23 /* ResizeImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EB23575932005FDB23 /* ResizeImages.m */; };
-		34DF60F023575E1E005FDB23 /* OperationWithArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF60EF23575E1E005FDB23 /* OperationWithArray.m */; };
 		34DF6124235F15C4005FDB23 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DF6123235F15C4005FDB23 /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -57,9 +56,10 @@
 		3412AC52234F384C00538F51 /* NewsFeedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsFeedAppTests.m; sourceTree = "<group>"; };
 		34D31CDF23618FA500AF2F15 /* FindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindTableViewCell.h; sourceTree = "<group>"; };
 		34D31CE023618FA500AF2F15 /* FindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindTableViewCell.m; sourceTree = "<group>"; };
-		34D31CE52361AFAE00AF2F15 /* OperationWithArrayTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationWithArrayTests.m; sourceTree = "<group>"; };
 		34D31CE72361B26400AF2F15 /* OperationWithImagesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationWithImagesTests.m; sourceTree = "<group>"; };
 		34D31CE92361B84400AF2F15 /* ParseDatetimeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDatetimeTests.m; sourceTree = "<group>"; };
+		34D31CEC2362F0D600AF2F15 /* NewsDistributor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDistributor.h; sourceTree = "<group>"; };
+		34D31CED2362F0D600AF2F15 /* NewsDistributor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDistributor.m; sourceTree = "<group>"; };
 		34D74CC9234F6A8800E0D7EF /* NewsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsSet.h; sourceTree = "<group>"; };
 		34D74CCA234F6A8800E0D7EF /* NewsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsSet.m; sourceTree = "<group>"; };
 		34D74CCF2350821300E0D7EF /* NewsPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPost.h; sourceTree = "<group>"; };
@@ -81,8 +81,6 @@
 		34DF60E7235757BC005FDB23 /* ParseDatetime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDatetime.m; sourceTree = "<group>"; };
 		34DF60EA23575932005FDB23 /* ResizeImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeImages.h; sourceTree = "<group>"; };
 		34DF60EB23575932005FDB23 /* ResizeImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeImages.m; sourceTree = "<group>"; };
-		34DF60EE23575E1E005FDB23 /* OperationWithArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OperationWithArray.h; sourceTree = "<group>"; };
-		34DF60EF23575E1E005FDB23 /* OperationWithArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OperationWithArray.m; sourceTree = "<group>"; };
 		34DF6122235F15C4005FDB23 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		34DF6123235F15C4005FDB23 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +124,7 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
-				34DF60ED23575DF2005FDB23 /* OperationWithArray */,
+				34D31CEB2362F09900AF2F15 /* NewsDistributor */,
 				34DF60E923575911005FDB23 /* OperationWithImages */,
 				34DF60E52357578F005FDB23 /* ParseDatetime */,
 				34DEC74E2355FC9400F5FB4E /* THSGTTPCommunication */,
@@ -162,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				3412AC52234F384C00538F51 /* NewsFeedAppTests.m */,
-				34D31CE52361AFAE00AF2F15 /* OperationWithArrayTests.m */,
 				34D31CE72361B26400AF2F15 /* OperationWithImagesTests.m */,
 				34D31CE92361B84400AF2F15 /* ParseDatetimeTests.m */,
 				3412AC50234F384C00538F51 /* Supporting Files */,
@@ -176,6 +173,15 @@
 				3412AC51234F384C00538F51 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		34D31CEB2362F09900AF2F15 /* NewsDistributor */ = {
+			isa = PBXGroup;
+			children = (
+				34D31CEC2362F0D600AF2F15 /* NewsDistributor.h */,
+				34D31CED2362F0D600AF2F15 /* NewsDistributor.m */,
+			);
+			name = NewsDistributor;
 			sourceTree = "<group>";
 		};
 		34D74CD62350971C00E0D7EF /* TableScreen */ = {
@@ -254,15 +260,6 @@
 				34DF60EB23575932005FDB23 /* ResizeImages.m */,
 			);
 			name = OperationWithImages;
-			sourceTree = "<group>";
-		};
-		34DF60ED23575DF2005FDB23 /* OperationWithArray */ = {
-			isa = PBXGroup;
-			children = (
-				34DF60EE23575E1E005FDB23 /* OperationWithArray.h */,
-				34DF60EF23575E1E005FDB23 /* OperationWithArray.m */,
-			);
-			name = OperationWithArray;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,11 +366,11 @@
 				3412AC3C234F384C00538F51 /* AppDelegate.m in Sources */,
 				34D31CE123618FA500AF2F15 /* FindTableViewCell.m in Sources */,
 				34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */,
+				34D31CEE2362F0D600AF2F15 /* NewsDistributor.m in Sources */,
 				34D74CD12350821300E0D7EF /* NewsPost.m in Sources */,
 				3412AC39234F384C00538F51 /* main.m in Sources */,
 				34DF60EC23575932005FDB23 /* ResizeImages.m in Sources */,
 				34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */,
-				34DF60F023575E1E005FDB23 /* OperationWithArray.m in Sources */,
 				34DF60E8235757BC005FDB23 /* ParseDatetime.m in Sources */,
 				34DEC7512355FCD400F5FB4E /* THSHTTPCommunication.m in Sources */,
 				34DEC74D2355D85F00F5FB4E /* CollectionViewCell.m in Sources */,
@@ -389,7 +386,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3412AC53234F384C00538F51 /* NewsFeedAppTests.m in Sources */,
-				34D31CE62361AFAF00AF2F15 /* OperationWithArrayTests.m in Sources */,
 				34D31CEA2361B84400AF2F15 /* ParseDatetimeTests.m in Sources */,
 				34D31CE82361B26400AF2F15 /* OperationWithImagesTests.m in Sources */,
 			);

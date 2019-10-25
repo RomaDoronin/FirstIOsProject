@@ -11,10 +11,9 @@
 #import "FindViewController.h"
 #import "FilterViewController.h"
 #import "CollectionViewController.h"
-#import "THSHTTPCommunication.h"
+#import "NewsDistributor.h"
 #import "ParseDatetime.h"
 #import "ResizeImages.h"
-#import "OperationWithArray.h"
 #import "TableViewCell.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate> {
@@ -26,13 +25,19 @@
     NSMutableArray *newsSource;
     NewsSet * sortedNewsSet;
     NewsSet * tmpNewsSet;
-    
-    THSHTTPCommunication *http;
+    NewsDistributor *newsDistributor;
 }
+
+@property (weak, nonatomic) IBOutlet UITableView *table;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ButtonFind;
+@property (weak, nonatomic) IBOutlet UISwitch *switchSort;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton;
+
+- (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event;
+- (IBAction)filterActionButton:(UIButton *)sender;
 
 @end
 
-static const int kPageSize = 20;
 static const NSInteger kMaxNewsNum = 100;
 static const NSInteger kPredNewsNumOfLoading = 5;
 
@@ -41,11 +46,13 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configurationViewController];
+    _table.rowHeight = UITableViewAutomaticDimension;
+    _table.estimatedRowHeight = 200;
 }
 
 #pragma mark - Configuration
 -(void)configurationViewController {
-    http = [[THSHTTPCommunication alloc] init];
+    newsDistributor = [[NewsDistributor alloc] init];
     
     isNewPageLoaded = NO;
     isNeedToSort = YES;
@@ -55,81 +62,9 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     newsSource = [[NSMutableArray alloc] init];
     
     NSString *numFirstPage = @"1";
-    [self getNewsFromURL: numFirstPage];
+    newsSet = [newsDistributor getNewsFromPage:numFirstPage];
 }
 
-#pragma mark - Get data from Server
-- (void)getNewsFromURL:(NSString *)page {
-    //THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
-    
-    NSString *apiKey = @"cef54047a9d94e41ad1ba8ffaa5d6bee";
-    NSString *keyWord = @"Apple";
-    NSString *date = @"2019-10-16";
-    NSString *sortBy = @"popularity";
-    
-    NSString *stringURL = [NSString stringWithFormat:@"https://newsapi.org/v2/everything?q=%@&from=%@&sortBy=%@&apiKey=%@&pageSize=%d&page=%@",
-                           keyWord,
-                           date,
-                           sortBy,
-                           apiKey,
-                           kPageSize,
-                           page];
-    
-    NSURL *url = [NSURL URLWithString:stringURL];
-    
-    [http retrieveURL:url successBlock:^(NSData *response) {
-        NSError *error = nil;
-        
-        NSDictionary *data = [NSJSONSerialization JSONObjectWithData:response options:0 error:&error];
-        
-        if (!error) {
-            if (data[@"articles"]) {
-                NSArray *articles = data[@"articles"];
-                for (NSDictionary *article in articles) {
-                    NSDictionary *source = article[@"source"];
-                    NSString *sourceName = source[@"name"];
-                    NSString *imageURL = article[@"urlToImage"];
-                    
-                    [newsSet addNews:article[@"title"] :article[@"description"] :article[@"content"] :imageURL :article[@"publishedAt"] :sourceName];
-                    
-                    
-                    if (![OperationWithArray checkForElementInArray :newsSource :sourceName]) {
-                        [newsSource addObject:sourceName];
-                    }
-                    
-                    [self getImageFromURL :imageURL :(newsSet.getCount - kPageSize)];
-                }
-                // So so
-                /*[self getImageFromURL :articles[0][@"urlToImage"] :0];*/
-                
-                [self.table reloadData];
-                isNewPageLoaded = NO;
-            }
-        }
-    }];
-}
-
-- (void)getImageFromURL:(NSString *)stringURL :(NSInteger)index {
-    //THSHTTPCommunication *http = [[THSHTTPCommunication alloc] init];
-    NSURL *url = [NSURL URLWithString:stringURL];
-    
-    __block NSInteger insideIndex = index;
-    
-    [http retrieveURL:url successBlock:^(NSData *response) {
-        if (response) {
-            [newsSet setRealImage:response :/*index*/insideIndex];
-            
-            [self.table reloadData];
-            
-            insideIndex++;
-        }
-        
-        // So so
-        /*if (index < newsSet.getCount - 1) {
-            [self getImageFromURL :[newsSet getAtIndex:index + 1].image :index + 1];
-        }*/
-    }];
-}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -148,11 +83,11 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     cell.NewsDatetime.text = [ParseDatetime parseDatetime:post.datetime];
     
     UIImage *image = [UIImage imageWithData:post.realImage];
-    const NSInteger kImageSize = 80;    
-    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
+    //const NSInteger kImageSize = 10;
+    //UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
     
-    cell.NewsImage.image = resizeImage;
-    
+    cell.NewsImage.image = image;
+
     return cell;
 }
 
@@ -182,6 +117,14 @@ static const NSInteger kPredNewsNumOfLoading = 5;
     
     return YES;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
+/*- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 10;
+}*/
 
 #pragma mark - Actions
 - (IBAction)switchActionSort:(UISwitch *)sender {

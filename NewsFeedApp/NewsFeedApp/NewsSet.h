@@ -11,11 +11,12 @@
 
 @interface NewsSet : NSObject
 
-- (void) addNews : (NSString *) title : (NSString *) subtitle : (NSString *) text : (NSString *) image : (NSString *) datetime : (NSString *) source;
-- (void) addNews : (NewsPost *) post;
-- (long) getCount;
-- (NewsPost *) getAtIndex : (long) index;
-- (NewsSet *) sortByDatetime;
-- (void) setRealImage : (NSData *) realImage : (long) index;
+- (void)addNews:(NSString *)title : (NSString *)subtitle : (NSString *)text : (NSString *)image : (NSString *)datetime : (NSString *)source;
+- (void)addNews:(NewsPost *)post;
+- (long)getCount;
+- (NewsPost *)getAtIndex:(long)index;
+- (NewsSet *)sortByDatetime;
+- (void)setRealImage:(NSData *)realImage : (long)index;
+- (NewsSet *)getCopy;
 
 @end

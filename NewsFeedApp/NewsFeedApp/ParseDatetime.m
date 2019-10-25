@@ -28,6 +28,9 @@ static const NSInteger kMinutePositionSecond = 15;
         @throw myException;
     }
     
+    
+    
+    
     char month1 = [datetime characterAtIndex:kMonthPositionFirst];
     char month2 = [datetime characterAtIndex:kMonthPositionSecond];
     
