@@ -20,5 +20,8 @@
 - (IBAction)switchActionSort:(UISwitch *)sender forEvent:(UIEvent *)event;
 - (IBAction)filterActionButton:(UIButton *)sender;
 
+- (void)didLoadNewsFromURLNewsSet;
+- (void)didLoadImageFromURL;
+
 @end
 

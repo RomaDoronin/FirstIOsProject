@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>63223A27-CC2C-4B6D-A425-DB5692E5C39A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>NewsFeedApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>7BA9AB96006624E2C2D0D35B2D6D324010E79C1B</key>
 		<string>https://github.com/RomaDoronin/FirstIOsProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>NewsFeedApp/NewsFeedApp.xcodeproj/project.xcworkspace</string>
+	<string>NewsFeedApp/NewsFeedApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>7BA9AB96006624E2C2D0D35B2D6D324010E79C1B</key>
