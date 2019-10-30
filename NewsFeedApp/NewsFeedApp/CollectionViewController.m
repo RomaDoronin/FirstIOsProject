@@ -9,6 +9,7 @@
 #import "CollectionViewController.h"
 #import "CollectionViewCell.h"
 #import "DetailViewController.h"
+#import "Router.h"
 
 @interface CollectionViewController ()
 
@@ -48,11 +49,7 @@ static NSString * const reuseIdentifier = @"gridCell";
 
 #pragma mark <UICollectionViewDelegate>
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
-    
-    detailView.newsPost = [newsSet getAtIndex:indexPath.row];
-    
-    [self.navigationController pushViewController:detailView animated:YES];
+    [Router goToDetailView:self NewsSet:newsSet ViewId:@"detailView" Index:indexPath.row];
     return YES;
 }
 

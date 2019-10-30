@@ -75,4 +75,24 @@
     post.realImage = realImage;
 }
 
+- (NewsSet *)getCopy {
+    NewsSet *copySet = [[NewsSet alloc] init];
+    
+    for(NewsPost *post in newsPostArray) {
+        NewsPost *newPost = [[NewsPost alloc] init];
+        
+        newPost.title = post.title;
+        newPost.subtitle = post.subtitle;
+        newPost.text = post.text;
+        newPost.image = post.image;
+        newPost.realImage = post.realImage;
+        newPost.datetime = post.datetime;
+        newPost.source = post.source;
+        
+        [copySet addNews:newPost];
+    }
+    
+    return copySet;
+}
+
 @end

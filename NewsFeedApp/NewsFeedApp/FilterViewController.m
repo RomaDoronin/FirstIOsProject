@@ -9,6 +9,7 @@
 #import "FilterViewController.h"
 #import "DetailViewController.h"
 #import "ResizeImages.h"
+#import "Router.h"
 
 @interface FilterViewController () {
 @private
@@ -24,17 +25,11 @@
 @synthesize newsSet;
 @synthesize newsSource;
 
-- (id)init {
-    if (self = [super init]) {
-        isFiltered = NO;
-        pickerCurrRow = 0;
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isFiltered = NO;
+    pickerCurrRow = 0;
 }
 
 #pragma mark - UITableViewDataSource
@@ -63,11 +58,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
-    
-    detailView.newsPost = [filteredNewsSet getAtIndex:indexPath.row];
-    
-    [self.navigationController pushViewController:detailView animated:YES];
+    [Router goToDetailView:self NewsSet:filteredNewsSet ViewId:@"detailView" Index:indexPath.row];
 }
 
 #pragma mark - UIPickerViewDataSource

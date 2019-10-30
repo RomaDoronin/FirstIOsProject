@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "ResizeImages.h"
 #import "FindTableViewCell.h"
+#include "Router.h"
 
 @interface FindViewController () {
 @private
@@ -21,41 +22,32 @@
 
 @implementation FindViewController
 
-- (id)init {
-    if (self = [super init]) {
-        isFiltered = NO;
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isFiltered = NO;
+}
+
+#pragma mark - Additional function
+- (NewsSet *)getNewsSetByIsFilter {
+    if (isFiltered) {
+        return filteredNewsSet;
+    }
+    else {
+        return self.newsSet;
+    }
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (isFiltered)
-    {
-        return [filteredNewsSet getCount];
-    }
-    else {
-        return [self.newsSet getCount];
-    }
+    return [[self getNewsSetByIsFilter] getCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"customCell";
     FindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     
-    NewsSet *outputSet;
-    
-    if (isFiltered) {
-        outputSet = filteredNewsSet;
-    }
-    else {
-        outputSet = self.newsSet;
-    }
+    NewsSet *outputSet = [self getNewsSetByIsFilter];
     
     NewsPost *post = [outputSet getAtIndex:indexPath.row];
     UIImage *image = [UIImage imageWithData:post.realImage];
@@ -71,33 +63,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
-    
-    if (isFiltered)
-    {
-        detailView.newsPost = [filteredNewsSet getAtIndex:indexPath.row];
-    }
-    else {
-        detailView.newsPost = [self.newsSet getAtIndex:indexPath.row];
-    }
-        
-    [self.navigationController pushViewController:detailView animated:YES];
+    NewsSet *outputSet = [self getNewsSetByIsFilter];
+    [Router goToDetailView:self NewsSet:outputSet ViewId:@"detailView" Index:indexPath.row];
 }
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         if (searchText.length == 0) {
             isFiltered = NO;
         }
         else {
+            NewsSet *newsSetCopy = self.newsSet.getCopy;
+            
             isFiltered = YES;
             filteredNewsSet = [[NewsSet alloc] init];
         
-            for (long count = 0; count < [self.newsSet getCount]; count++) {
+            for (long count = 0; count < [newsSetCopy getCount]; count++) {
                 // Search for title
-                NewsPost *post = [self.newsSet getAtIndex:count];
+                NewsPost *post = [newsSetCopy getAtIndex:count];
                 NSRange nameRange = [post.title rangeOfString:searchText options:NSCaseInsensitiveSearch];
                 if (nameRange.location != NSNotFound) {
                     [filteredNewsSet addNews:post];
@@ -105,7 +89,9 @@
             }
         }
     
-        [self.findTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.findTable reloadData];
+        });
     });
 }
 

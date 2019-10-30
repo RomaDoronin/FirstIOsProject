@@ -34,6 +34,9 @@
     XCTAssertEqualObjects(@"19.11 08:05", [ParseDatetime parseDatetime:@"2010-11-19T08:05:12-01"]);
     XCTAssertEqualObjects(@"27.02 09:24", [ParseDatetime parseDatetime:@"2015-02-27T09:24:14+09"]);
     XCTAssertEqualObjects(@"30.09 19:41", [ParseDatetime parseDatetime:@"2015-09-30T19:41:59+12"]);
+    XCTAssertEqualObjects(@"18.05 15:42", [ParseDatetime parseDatetime:@"2019-05-18T15:42:13"]);
+    XCTAssertEqualObjects(@"27.08 21:00", [ParseDatetime parseDatetime:@"2019-08-27T21:00"]);
+    XCTAssertEqualObjects(@"27.08 21:00", [ParseDatetime parseDatetime:@"_____08_27_21_00"]);
 }
 
 -(void)testEmplyInputString {

@@ -16,18 +16,18 @@
 #import "ResizeImages.h"
 #import "TableViewCell.h"
 #import "LoadData.h"
+#import "Router.h"
 
 @interface ViewController ()<UITableViewDataSource, UITableViewDelegate> {
 @private
-    NewsSet * newsSet;
+    NewsSet *newsSet;
+    NewsSet *sortedNewsSet;
+    NewsSet *tmpNewsSet;
+    NSMutableArray *newsSource;
+    THSHTTPCommunication *http;
     BOOL isNewPageLoaded;
     BOOL isNeedToSort;
     BOOL isSort;
-    NSMutableArray *newsSource;
-    NewsSet * sortedNewsSet;
-    NewsSet * tmpNewsSet;
-    
-    THSHTTPCommunication *http;
 }
 
 @end
@@ -59,6 +59,19 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 }
 
 #pragma mark - Get data from Server callback
+- (void)newsUploadingIndex:(NSInteger)index {
+    if ((index == newsSet.getCount - kPredNewsNumOfLoading) && (!isNewPageLoaded)) {
+        NSInteger page = newsSet.getCount / kPageSize + 1;
+        if (page < kMaxNewsNum / kPageSize) {
+            isNewPageLoaded = YES;
+            isNeedToSort = YES;
+            
+            NSString *pageNum = [NSString stringWithFormat:@"%ld", (long)page];
+            [LoadData loadNewsFromURLFromView:self PageNum:pageNum PageSize:kPageSize Http:http NewsSet:newsSet NewsSource:newsSource];
+        }
+    }
+}
+
 - (void)didLoadNewsFromURLNewsSet {
     [self.table reloadData];
     isNewPageLoaded = NO;
@@ -66,6 +79,22 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 
 - (void)didLoadImageFromURL {
     [self.table reloadData];
+}
+
+#pragma mark - Setting object
+- (void)settingTableCell:(TableViewCell *)cell Index:(NSInteger)index {
+    NewsPost *post = [[NewsPost alloc] init];
+    
+    post = [newsSet getAtIndex:index];
+    
+    cell.NewsTitle.text = post.title;
+    cell.NewsDatetime.text = [ParseDatetime parseDatetime:post.datetime];
+    
+    UIImage *image = [UIImage imageWithData:post.realImage];
+    const NSInteger kImageSize = 80;
+    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
+    
+    cell.NewsImage.image = resizeImage;
 }
 
 #pragma mark - UITableViewDataSource
@@ -76,31 +105,14 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellId = @"customCell";
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    
-    NewsPost * post = [[NewsPost alloc] init];
-    
-    post = [newsSet getAtIndex:indexPath.row];
-    
-    cell.NewsTitle.text = post.title;
-    cell.NewsDatetime.text = [ParseDatetime parseDatetime:post.datetime];
-    
-    UIImage *image = [UIImage imageWithData:post.realImage];
-    const NSInteger kImageSize = 80;    
-    UIImage *resizeImage = [ResizeImages resizeImage:image KeepingProportionByOneSide:kImageSize];
-    
-    cell.NewsImage.image = resizeImage;
+    [self settingTableCell:cell Index:indexPath.row];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    DetailViewController * detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detaiView"];
-    
-    detailView.newsPost = [newsSet getAtIndex:indexPath.row];
-    
-    [self.navigationController pushViewController:detailView animated:YES];
+    [Router goToDetailView:self NewsSet:newsSet ViewId:@"detailView" Index:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,16 +120,7 @@ static const NSInteger kPredNewsNumOfLoading = 5;
         return YES;
     }
     
-    if ((indexPath.row == newsSet.getCount - kPredNewsNumOfLoading) && (!isNewPageLoaded)) {
-        NSInteger page = newsSet.getCount / kPageSize + 1;
-        if (page < kMaxNewsNum / kPageSize) {
-            isNewPageLoaded = YES;
-            isNeedToSort = YES;
-            
-            NSString *pageNum = [NSString stringWithFormat:@"%ld", (long)page];
-            [LoadData loadNewsFromURLFromView:self PageNum:pageNum PageSize:kPageSize Http:http NewsSet:newsSet NewsSource:newsSource];
-        }
-    }
+    [self newsUploadingIndex:indexPath.row];
     
     return YES;
 }
@@ -146,20 +149,11 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 }
 
 - (IBAction)findButton:(UIBarButtonItem *)sender {
-    FindViewController * findView = [self.storyboard instantiateViewControllerWithIdentifier:@"findView"];
-    
-    findView.newsSet = newsSet;
-    
-    [self.navigationController pushViewController:findView animated:YES];
+    [Router goToDetailView:self NewsSet:newsSet ViewId:@"findView"];
 }
 
 - (IBAction)filterActionButton:(UIButton *)sender {
-    FilterViewController * filterView = [self.storyboard instantiateViewControllerWithIdentifier:@"filterView"];
-    
-    filterView.newsSet = newsSet;
-    filterView.newsSource = newsSource;
-    
-    [self.navigationController pushViewController:filterView animated:YES];
+    [Router goToDetailView:self NewsSet:newsSet ViewId:@"filterView" NewsSource:newsSource];
 }
 
 - (IBAction)buttonSelectFilter:(UIButton *)sender {
@@ -167,11 +161,7 @@ static const NSInteger kPredNewsNumOfLoading = 5;
 }
 
 - (IBAction)gridActionButton:(UIBarButtonItem *)sender {
-    CollectionViewController * gridView = [self.storyboard instantiateViewControllerWithIdentifier:@"gridView"];
-    
-    gridView.newsSet = newsSet;
-    
-    [self.navigationController pushViewController:gridView animated:YES];
+    [Router goToDetailView:self NewsSet:newsSet ViewId:@"gridView"];
 }
 
 @end

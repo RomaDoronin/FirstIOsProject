@@ -17,6 +17,7 @@
 		34D31CE82361B26400AF2F15 /* OperationWithImagesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE72361B26400AF2F15 /* OperationWithImagesTests.m */; };
 		34D31CEA2361B84400AF2F15 /* ParseDatetimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31CE92361B84400AF2F15 /* ParseDatetimeTests.m */; };
 		34D31D352369870700AF2F15 /* LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31D342369870700AF2F15 /* LoadData.m */; };
+		34D31D3823698F7600AF2F15 /* Router.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D31D3723698F7600AF2F15 /* Router.m */; };
 		34D74CCB234F6A8800E0D7EF /* NewsSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CCA234F6A8800E0D7EF /* NewsSet.m */; };
 		34D74CD12350821300E0D7EF /* NewsPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CD02350821300E0D7EF /* NewsPost.m */; };
 		34D74CDC2350CA9F00E0D7EF /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D74CDB2350CA9F00E0D7EF /* DetailViewController.m */; };
@@ -60,6 +61,8 @@
 		34D31CE92361B84400AF2F15 /* ParseDatetimeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseDatetimeTests.m; sourceTree = "<group>"; };
 		34D31D332369870700AF2F15 /* LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadData.h; sourceTree = "<group>"; };
 		34D31D342369870700AF2F15 /* LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadData.m; sourceTree = "<group>"; };
+		34D31D3623698F7600AF2F15 /* Router.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Router.h; sourceTree = "<group>"; };
+		34D31D3723698F7600AF2F15 /* Router.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Router.m; sourceTree = "<group>"; };
 		34D74CC9234F6A8800E0D7EF /* NewsSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsSet.h; sourceTree = "<group>"; };
 		34D74CCA234F6A8800E0D7EF /* NewsSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsSet.m; sourceTree = "<group>"; };
 		34D74CCF2350821300E0D7EF /* NewsPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsPost.h; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 		3412AC35234F384C00538F51 /* NewsFeedApp */ = {
 			isa = PBXGroup;
 			children = (
+				34D31D3923698F7900AF2F15 /* Router */,
 				34D31D32236986E600AF2F15 /* LoadData */,
 				34DF60E923575911005FDB23 /* OperationWithImages */,
 				34DF60E52357578F005FDB23 /* ParseDatetime */,
@@ -182,6 +186,15 @@
 				34D31D342369870700AF2F15 /* LoadData.m */,
 			);
 			name = LoadData;
+			sourceTree = "<group>";
+		};
+		34D31D3923698F7900AF2F15 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				34D31D3623698F7600AF2F15 /* Router.h */,
+				34D31D3723698F7600AF2F15 /* Router.m */,
+			);
+			name = Router;
 			sourceTree = "<group>";
 		};
 		34D74CD62350971C00E0D7EF /* TableScreen */ = {
@@ -377,6 +390,7 @@
 				34DEC7432354C63000F5FB4E /* FilterViewController.m in Sources */,
 				34DEC73F23547DE100F5FB4E /* FindViewController.m in Sources */,
 				34DF6124235F15C4005FDB23 /* TableViewCell.m in Sources */,
+				34D31D3823698F7600AF2F15 /* Router.m in Sources */,
 				34DEC74A2355D70F00F5FB4E /* CollectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

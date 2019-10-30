@@ -13,7 +13,7 @@
 @interface FilterViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property NewsSet *newsSet;
-@property NSArray *newsSource;
+@property NSMutableArray *newsSource;
 
 @property (weak, nonatomic) IBOutlet UITableView *filterTable;
 @property (weak, nonatomic) IBOutlet UIPickerView *filterPickerView;
