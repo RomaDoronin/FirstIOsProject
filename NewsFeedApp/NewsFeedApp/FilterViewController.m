@@ -62,12 +62,10 @@
 }
 
 #pragma mark - UIPickerViewDataSource
-// returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-// returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return newsSource.count;
 }
@@ -76,6 +74,11 @@
     return [NSString stringWithFormat:@"%@", newsSource[row]];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    pickerCurrRow = row;
+}
+
+#pragma mark - Actions
 - (IBAction)filterActionButton:(UIBarButtonItem *)sender {
     NSString * searchSource = newsSource[pickerCurrRow];
     isFiltered = YES;
@@ -91,10 +94,6 @@
     }
     
     [self.filterTable reloadData];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    pickerCurrRow = row;
 }
 
 @end

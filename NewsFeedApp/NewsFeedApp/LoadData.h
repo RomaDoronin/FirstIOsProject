@@ -16,5 +16,5 @@
 
 + (void)loadNewsFromURLFromView:(ViewController *)view PageNum:(NSString *)pageNum PageSize:(NSInteger)pageSize Http:(THSHTTPCommunication *)http NewsSet:(NewsSet *)newsSet NewsSource:(NSMutableArray *)newsSource;
 + (void)loadImageFromURLFromView:(ViewController *)view StringURL:(NSString *)stringURL Index:(NSInteger)index Http:(THSHTTPCommunication *)http NewsSet:(NewsSet *)newsSet;
-
+   
 @end

@@ -13,7 +13,8 @@
 
 @implementation LoadData
 
-+ (void)loadNewsFromURLFromView:(ViewController *)view PageNum:(NSString *)pageNum PageSize:(NSInteger)pageSize Http:(THSHTTPCommunication *)http NewsSet:(NewsSet *)newsSet NewsSource:(NSMutableArray *)newsSource {
++ (void)loadNewsFromURLFromView:(ViewController *)view
+                        PageNum:(NSString *)pageNum PageSize:(NSInteger)pageSize Http:(THSHTTPCommunication *)http NewsSet:(NewsSet *)newsSet NewsSource:(NSMutableArray *)newsSource {
     NSString *apiKey = @"cef54047a9d94e41ad1ba8ffaa5d6bee";
     NSString *keyWord = @"Apple";
     NSString *date = @"2019-10-16";
@@ -53,7 +54,7 @@
                 
                 [view didLoadNewsFromURLNewsSet];
             }
-        }
+         }
     }];
 }
 

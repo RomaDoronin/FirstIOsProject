@@ -15,8 +15,6 @@
 
 @end
 
-static NSString * const reuseIdentifier = @"gridCell";
-
 @implementation CollectionViewController
 
 @synthesize newsSet;
@@ -30,12 +28,12 @@ static NSString * const reuseIdentifier = @"gridCell";
     return 1;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [newsSet getCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *reuseIdentifier = @"gridCell";
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     NewsPost * post = [newsSet getAtIndex:indexPath.row];
